@@ -41,6 +41,6 @@ h2. CSS
 
 h2. JavaScript
 
-* JQuery
-* JQuery UI
+* JQuery (google hosted)
+* JQuery UI (google hosted)
 * under_construction
