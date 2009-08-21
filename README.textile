@@ -1,3 +1,14 @@
+h1. Enlightened Template (Rails Template from Enlight Solutions)
+
+*# clone this repo
+  <code>
+    git clone git://github.com/dpickett/enlightened_template.git
+  </code>
+*# create a rails app from this template
+  <code>
+    rails <app_name> -m <path_to_repo>/template.rb
+  </code>
+  
 h2. Gems
 
 * Authologic
