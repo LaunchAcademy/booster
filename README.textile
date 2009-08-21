@@ -1,0 +1,46 @@
+h2. Gems
+
+* Authologic
+* Inherited Resources
+* Formtastic
+* Searchlogic
+* Paperclip
+* Hoptoad Notifier
+* metric_fu
+* inaction_mailer for dev
+
+h2. Plugins
+
+* tab_menu
+* limerick_rake
+* superdeploy
+
+h2. Testing
+
+* Shoulda
+* factory_girl
+* cucumber
+* webrat
+* jferris's mocha fork (spies)
+* metric_fu
+* pending
+
+h2. Initializers
+
+* action_mailer setup
+* hoptoad setup
+* validation_fix - make fieldWithErrors element a &lt;span&gt;
+* hoptoad - setup hoptoad
+* debugging stuff
+
+h2. CSS
+
+* Eric Meyer's Reset
+* 960.gs
+* conditional IE6/IE7 stylesheets
+
+h2. JavaScript
+
+* JQuery
+* JQuery UI
+* under_construction
