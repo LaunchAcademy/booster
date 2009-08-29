@@ -43,6 +43,12 @@ end
 plugin 'limerick_rake', :git => "git://github.com/thoughtbot/limerick_rake.git"
 plugin 'superdeploy', :git => "git://github.com/saizai/superdeploy.git"
 plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
+plugin 'spreadhead', :git => "git://github.com/jeffrafter/spreadhead.git"
+
+#rm routes file because it prepends rather than appends
+spreadhead_routes_file = "vendor/plugins/spreadhead/config/spreadhead_routes.rb"
+FileUtils.rm_rf("vendor/plugins/spreadhead/config/spreadhead_routes.rb")
+FileUtils.touch("vendor/plugins/spreadhead/config/spreadhead_routes.rb")
 
 #====================
 # GEMS
@@ -137,10 +143,10 @@ file 'app/views/layouts/application.html.erb',
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title><%= yield(:title) %> || <%= PROJECT_NAME.humanize %></title>
-    <meta name="description" content="<%= yield(:meta_description) || PROJECT_NAME.humanize %>">
-    <meta name="keywords" content="<%= yield(:meta_keywords) || PROJECT_NAME.humanize %>">
+    <meta name="description" content="<%= yield(:description) || PROJECT_NAME.humanize %>">
+    <meta name="keywords" content="<%= yield(:keywords) || PROJECT_NAME.humanize %>">
     
-    <%= stylesheeet_link_tag "reset", "under_construction", "960" %>
+    <%= stylesheet_link_tag "reset", "under_construction", "960" %>
     
     <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
     <!--[if lte IE 6]><%= stylesheet_link_tag "ie6" %><![endif]-->
@@ -288,6 +294,29 @@ file 'config/initializers/debugging.rb',
 end
 }
 
+file 'config/initializers/spreadhead.rb',
+%q{
+  module Spreadhead
+    module PagesAuth
+      def self.filter(controller)
+        controller.send(:head, 403)
+      end
+    end  
+  end
+}
+
+file 'config/routes.rb',
+%q{
+  ActionController::Routing::Routes.draw do |map|
+
+    map.resources :pages, :controller => 'spreadhead/pages'
+    map.connect '*url', :controller => 'spreadhead/pages', :action => 'show'
+
+    map.connect ':controller/:action/:id'
+    map.connect ':controller/:action/:id.:format'
+  end
+}, :collision => :force
+
 inside('db') do
   run "mkdir bootstrap"
 end
@@ -297,7 +326,7 @@ end
 # ====================
 
 inside('test') do
-  run "mkdir factories"
+  FileUtils.touch("factories.rb")
 end
 
 file 'test/shoulda_macros/forms.rb', 
@@ -388,6 +417,11 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 require 'action_view/test_case'
 
+require 'factory_girl'
+require 'factories'
+
+begin; require "redgreen"; rescue; end
+
 class ActiveSupport::TestCase
 
   self.use_transactional_fixtures = true
@@ -416,7 +450,7 @@ file 'public/javascripts/xhr_fix.js',
 # ====================
 # Cucumber
 # ====================
-run "script/generate cucumber"
+generate(:cucumber)
 
 # ====================
 # CSS
@@ -450,6 +484,8 @@ from_repo("dpickett", "under_construction",
 from_repo("dpickett", "under_construction", 
   "script/jquery.under_construction.js",   
   "public/javascripts/jquery.under_construction.js")
+  
+generate(:formtastic_stylesheets)
 
 # ====================
 # FINALIZE
@@ -472,6 +508,8 @@ db/development.sqlite3
 public/system/*
 tmp/metric_fu/*
 tmp/sent_mails/*
+config/database.yml
+*.swp
 END
 
 run 'find . \( -type d -empty \) -and \( -not -regex ./\.git.* \) -exec touch {}/.gitignore \;'
