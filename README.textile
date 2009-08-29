@@ -25,6 +25,7 @@ h2. Plugins
 * tab_menu
 * limerick_rake
 * superdeploy
+* codeofficer's silky_buttons generator
 
 h2. Testing
 

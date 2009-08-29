@@ -44,6 +44,7 @@ plugin 'limerick_rake', :git => "git://github.com/thoughtbot/limerick_rake.git"
 plugin 'superdeploy', :git => "git://github.com/saizai/superdeploy.git"
 plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
 plugin 'spreadhead', :git => "git://github.com/jeffrafter/spreadhead.git"
+plugin 'silky_buttons', :git => "git://github.com/CodeOfficer/silky-buttons-for-rails.git"
 
 #rm routes file because it prepends rather than appends
 spreadhead_routes_file = "vendor/plugins/spreadhead/config/spreadhead_routes.rb"
@@ -146,7 +147,7 @@ file 'app/views/layouts/application.html.erb',
     <meta name="description" content="<%= yield(:description) || PROJECT_NAME.humanize %>" />
     <meta name="keywords" content="<%= yield(:keywords) || PROJECT_NAME.humanize %>" />
     
-    <%= stylesheet_link_tag "reset", "under_construction", "960" %>
+    <%= stylesheet_link_tag "reset", "under_construction", "960", "silky_buttons.css" %>
     
     <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
     <!--[if lte IE 6]><%= stylesheet_link_tag "ie6" %><![endif]-->
@@ -486,6 +487,8 @@ from_repo("dpickett", "under_construction",
   "public/javascripts/jquery.under_construction.js")
   
 generate(:formtastic_stylesheets)
+
+generate(:silky_buttons)
 
 # ====================
 # FINALIZE
