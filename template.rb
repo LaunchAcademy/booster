@@ -501,7 +501,7 @@ run "rm public/favicon.ico"
 # Set up gitignore and commit base state
 file '.gitignore', <<-END
 log/*.log
-tmp/**/*
+tmp/*
 .DS\_Store
 .DS_Store
 db/test.sqlite3
@@ -509,8 +509,6 @@ db/development.sqlite3
 /log/*.pid
 /coverage/*
 public/system/*
-tmp/metric_fu/*
-tmp/sent_mails/*
 config/database.yml
 *.swp
 END
