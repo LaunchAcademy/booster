@@ -143,8 +143,8 @@ file 'app/views/layouts/application.html.erb',
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title><%= yield(:title) %> || <%= PROJECT_NAME.humanize %></title>
-    <meta name="description" content="<%= yield(:description) || PROJECT_NAME.humanize %>">
-    <meta name="keywords" content="<%= yield(:keywords) || PROJECT_NAME.humanize %>">
+    <meta name="description" content="<%= yield(:description) || PROJECT_NAME.humanize %>" />
+    <meta name="keywords" content="<%= yield(:keywords) || PROJECT_NAME.humanize %>" />
     
     <%= stylesheet_link_tag "reset", "under_construction", "960" %>
     
