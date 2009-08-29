@@ -483,7 +483,7 @@ from_repo("dpickett", "under_construction",
   "public/stylesheets/under_construction.css")
 
 from_repo("dpickett", "under_construction", 
-  "script/jquery.under_construction.js",   
+  "javascripts/jquery.under_construction.js",   
   "public/javascripts/jquery.under_construction.js")
   
 generate(:formtastic_stylesheets)
