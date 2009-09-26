@@ -78,6 +78,8 @@ gem "cwninja-inaction_mailer",
 #==================
 # Test Gems
 #==================
+gem 'rspec', :lib => 'rspec', :env => 'test'
+gem 'rspec-rails', :env => 'test'
 gem 'jferris-mocha', :lib => 'mocha', :env => "test"
 gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :env => "test"
 gem 'thoughtbot-shoulda', :lib => 'shoulda', :env => "test"
@@ -89,15 +91,14 @@ gem 'jscruggs-metric_fu',
 gem "webrat", 
   :lib => "webrat",
   :env => 'test'
-gem "jeremymcanally-pending", 
-  :lib => "pending",
-  :env => 'test'
 
 rake("gems:install", :sudo => true)
 # rake("gems:unpack")
 
 prepend_to_file('config/environment.rb', "PROJECT_NAME = 'CHANGE'\r\n")
 
+generate(:rspec)
+FileUtils.rm_rf("test")
 #====================
 # APP
 #====================
@@ -215,7 +216,7 @@ initializer 'mocks.rb',
 # or before the first server request in production. 
 
 Rails.configuration.to_prepare do
-  Dir[File.join(RAILS_ROOT, 'test', 'mocks', RAILS_ENV, '*.rb')].each do |f|
+  Dir[File.join(RAILS_ROOT, 'spec', 'mocks', RAILS_ENV, '*.rb')].each do |f|
     load f
   end
 end
@@ -326,120 +327,10 @@ end
 # TEST
 # ====================
 
-inside('test') do
+inside('spec') do
   FileUtils.touch("factories.rb")
 end
 
-file 'test/shoulda_macros/forms.rb', 
-%q{class ActiveSupport::TestCase
-  def self.should_have_form(opts)
-    model = self.name.gsub(/ControllerTest$/, '').singularize.downcase
-    model = model[model.rindex('::')+2..model.size] if model.include?('::')
-    http_method, hidden_http_method = form_http_method opts[:method]
-    should "have a #{model} form" do
-      assert_select "form[action=?][method=#{http_method}]", eval(opts[:action]) do
-        if hidden_http_method
-          assert_select "input[type=hidden][name=_method][value=#{hidden_http_method}]"
-        end
-        opts[:fields].each do |attribute, type|
-          attribute = attribute.is_a?(Symbol) ? "#{model}[#{attribute.to_s}]" : attribute
-          assert_select "input[type=#{type.to_s}][name=?]", attribute
-        end
-        assert_select "input[type=submit]"
-      end
-    end
-  end
-
-  def self.form_http_method(http_method)
-    http_method = http_method.nil? ? 'post' : http_method.to_s
-    if http_method == "post" || http_method == "get"
-      return http_method, nil
-    else
-      return "post", http_method
-    end
-  end  
-end
-}
-
-file 'test/shoulda_macros/pagination.rb', 
-%q{class ActiveSupport::TestCase
-  # Example:
-  #  context "a GET to index logged in as admin" do
-  #    setup do
-  #      login_as_admin 
-  #      get :index
-  #    end
-  #    should_paginate_collection :users
-  #    should_display_pagination
-  #  end
-  def self.should_paginate_collection(collection_name)
-    should "paginate #{collection_name}" do
-      assert collection = assigns(collection_name), 
-        "Controller isn't assigning to @#{collection_name.to_s}."
-      assert_kind_of WillPaginate::Collection, collection, 
-        "@#{collection_name.to_s} isn't a WillPaginate collection."
-    end
-  end
-  
-  def self.should_display_pagination
-    should "display pagination" do
-      assert_select "div.pagination", { :minimum => 1 }, 
-        "View isn't displaying pagination. Add <%= will_paginate @collection %>."
-    end
-  end
-  
-  # Example:
-  #  context "a GET to index not logged in as admin" do
-  #    setup { get :index }
-  #    should_not_paginate_collection :users
-  #    should_not_display_pagination
-  #  end
-  def self.should_not_paginate_collection(collection_name)
-    should "not paginate #{collection_name}" do
-      assert collection = assigns(collection_name), 
-        "Controller isn't assigning to @#{collection_name.to_s}."
-      assert_not_equal WillPaginate::Collection, collection.class, 
-        "@#{collection_name.to_s} is a WillPaginate collection."
-    end
-  end
-  
-  def self.should_not_display_pagination
-    should "not display pagination" do
-      assert_select "div.pagination", { :count => 0 }, 
-        "View is displaying pagination. Check your logic."
-    end
-  end
-end
-}
-
-file 'test/test_helper.rb', 
-%q{ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
-require 'test_help'
-require 'action_view/test_case'
-
-require 'factory_girl'
-require 'factories'
-
-begin; require "redgreen"; rescue; end
-
-class ActiveSupport::TestCase
-
-  self.use_transactional_fixtures = true
-  self.use_instantiated_fixtures  = false
-
-  self.backtrace_silencers << :rails_vendor
-  self.backtrace_filters   << :rails_root
-
-end
-
-class ActionView::TestCase
-  # Enable UrlWriter when testing helpers
-  include ActionController::UrlWriter
-  # Default host for helper tests
-  default_url_options[:host] = HOST
-end
-}
 
 file 'public/javascripts/xhr_fix.js',
 %q{jQuery.ajaxSetup({ 
