@@ -462,20 +462,14 @@ download("http://meyerweb.com/eric/tools/css/reset/reset.css",
   "public/stylesheets/reset.css")
   
 #960.gs
-from_repo("nathansmith", 
-  "960-grid-system", 
-  "code/css/960.css", 
+download("http://bitbucket.org/nathansmith/960-grid-system/raw/tip/code/css/960.css", 
   "public/stylesheets/960.css")
 
 run "mkdir public/images/grid"
-from_repo("nathansmith", 
-  "960-grid-system", 
-  "code/img/12_col.gif", 
+download("http://bitbucket.org/nathansmith/960-grid-system/raw/tip/code/img/12_col.gif",
   "public/images/grid/12_col.gif")
-  
-from_repo("nathansmith", 
-  "960-grid-system", 
-  "code/img/16_col.gif",
+
+download("http://bitbucket.org/nathansmith/960-grid-system/raw/tip/code/img/16_col.gif",
   "public/images/grid/16_col.gif")
 
 from_repo("dpickett", "under_construction",  
