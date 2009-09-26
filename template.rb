@@ -55,7 +55,7 @@ FileUtils.touch("vendor/plugins/spreadhead/config/spreadhead_routes.rb")
 # GEMS
 #====================
 
-gem 'RedCloth', :lib => 'redcloth', :version => '~> 3.0.4'
+gem 'RedCloth', :lib => 'redcloth', :version => '~> 4.2.2'
 gem 'thoughtbot-hoptoad_notifier', :lib => "hoptoad_notifier"
 gem 'mislav-will_paginate', :lib => "will_paginate"
 gem 'thoughtbot-paperclip', :lib => "paperclip"
