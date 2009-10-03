@@ -78,8 +78,8 @@ gem "cwninja-inaction_mailer",
 #==================
 # Test Gems
 #==================
-gem 'rspec', :lib => 'rspec', :env => 'test'
-gem 'rspec-rails', :env => 'test'
+gem 'rspec', :lib => false, :env => 'test'
+gem 'rspec-rails', :lib => false, :env => 'test'
 gem 'jferris-mocha', :lib => 'mocha', :env => "test"
 gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :env => "test"
 gem 'thoughtbot-shoulda', :lib => 'shoulda', :env => "test"

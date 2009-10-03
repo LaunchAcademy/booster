@@ -29,6 +29,7 @@ h2. Plugins
 
 h2. Testing
 
+* Rspec
 * Shoulda
 * factory_girl
 * cucumber
