@@ -45,6 +45,7 @@ plugin 'superdeploy', :git => "git://github.com/saizai/superdeploy.git"
 plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
 plugin 'spreadhead', :git => "git://github.com/jeffrafter/spreadhead.git"
 plugin 'silky_buttons', :git => "git://github.com/CodeOfficer/silky-buttons-for-rails.git"
+plugin 'hoptoad_notifier', :git => "git://github.com/thoughtbot/hoptoad_notifier.git"
 
 #rm routes file because it prepends rather than appends
 spreadhead_routes_file = "vendor/plugins/spreadhead/config/spreadhead_routes.rb"
@@ -56,21 +57,21 @@ FileUtils.touch("vendor/plugins/spreadhead/config/spreadhead_routes.rb")
 #====================
 
 gem 'RedCloth', :lib => 'redcloth', :version => '~> 4.2.2'
-gem 'thoughtbot-hoptoad_notifier', :lib => "hoptoad_notifier"
-gem 'mislav-will_paginate', :lib => "will_paginate"
-gem 'thoughtbot-paperclip', :lib => "paperclip"
+gem 'will_paginate', :lib => "will_paginate"
+gem 'paperclip', :lib => "paperclip"
 gem "alexdunae-validates_email_format_of", :lib => "validates_email_format_of"
-gem 'rsl-stringex', :lib => "stringex"
+gem 'stringex', :lib => "stringex"
 gem 'newrelic_rpm'
-gem 'binarylogic-authlogic', :lib => "authlogic"
-gem 'binarylogic-searchlogic', :lib => "searchlogic"
-gem 'josevalim-inherited_resources', :lib => 'inherited_resources'
-gem 'justinfrench-formtastic', :lib => 'formtastic'
+gem 'authlogic', :lib => "authlogic"
+gem 'searchlogic', :lib => "searchlogic"
+gem 'inherited_resources', :lib => 'inherited_resources'
+gem 'formtastic', :lib => 'formtastic'
+gem 'capistrano'
 
 #==================
 # Development Gems
 #==================
-gem "cwninja-inaction_mailer",
+gem "inaction_mailer",
   :lib => 'inaction_mailer/force_load',
   :source => 'http://gems.github.com',
   :env => 'development'
@@ -81,10 +82,10 @@ gem "cwninja-inaction_mailer",
 gem 'rspec', :lib => false, :env => 'test'
 gem 'rspec-rails', :lib => false, :env => 'test'
 gem 'jferris-mocha', :lib => 'mocha', :env => "test"
-gem 'thoughtbot-factory_girl', :lib => 'factory_girl', :env => "test"
-gem 'thoughtbot-shoulda', :lib => 'shoulda', :env => "test"
+gem 'factory_girl', :lib => 'factory_girl', :env => "test"
+gem 'shoulda', :lib => 'shoulda', :env => "test"
 gem "cucumber", :env => "test"
-gem 'jscruggs-metric_fu', 
+gem 'metric_fu', 
   :lib => 'metric_fu', 
   :source => 'http://gems.github.com',
   :env => 'test'
