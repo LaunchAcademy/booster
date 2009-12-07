@@ -47,6 +47,7 @@ plugin 'spreadhead', :git => "git://github.com/jeffrafter/spreadhead.git"
 plugin 'silky_buttons', :git => "git://github.com/CodeOfficer/silky-buttons-for-rails.git"
 plugin 'hoptoad_notifier', :git => "git://github.com/thoughtbot/hoptoad_notifier.git"
 plugin 'rails_xss', :git => "git://github.com/NZKoz/rails_xss.git"
+plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git"
 
 #rm routes file because it prepends rather than appends
 spreadhead_routes_file = "vendor/plugins/spreadhead/config/spreadhead_routes.rb"
@@ -99,8 +100,11 @@ rake("gems:install", :sudo => true)
 
 prepend_to_file('config/environment.rb', "PROJECT_NAME = 'CHANGE'\r\n")
 
-generate(:rspec)
 FileUtils.rm_rf("test")
+
+generate(:rspec)
+generate(:blue_ridge)
+#
 #====================
 # APP
 #====================
