@@ -69,6 +69,7 @@ gem 'searchlogic', :lib => "searchlogic"
 gem 'inherited_resources', :lib => 'inherited_resources'
 gem 'formtastic', :lib => 'formtastic'
 gem 'capistrano'
+gem 'erubis'
 
 #==================
 # Development Gems
