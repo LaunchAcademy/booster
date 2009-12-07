@@ -26,10 +26,12 @@ h2. Plugins
 * limerick_rake
 * superdeploy
 * codeofficer's silky_buttons generator
+* rails_xss
 
 h2. Testing
 
 * Rspec
+* blue-ridge
 * Shoulda
 * factory_girl
 * cucumber
