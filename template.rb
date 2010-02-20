@@ -45,7 +45,6 @@ plugin 'superdeploy', :git => "git://github.com/saizai/superdeploy.git"
 plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
 plugin 'spreadhead', :git => "git://github.com/jeffrafter/spreadhead.git"
 plugin 'silky_buttons', :git => "git://github.com/CodeOfficer/silky-buttons-for-rails.git"
-plugin 'hoptoad_notifier', :git => "git://github.com/thoughtbot/hoptoad_notifier.git"
 plugin 'rails_xss', :git => "git://github.com/NZKoz/rails_xss.git"
 plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git"
 
@@ -67,6 +66,7 @@ gem 'newrelic_rpm'
 gem 'authlogic', :lib => "authlogic"
 gem 'searchlogic', :lib => "searchlogic"
 gem 'inherited_resources', :lib => 'inherited_resources', :version => '1.0.3'
+gem 'hoptoad_notifier'
 gem 'formtastic', :lib => 'formtastic'
 gem 'capistrano'
 gem 'erubis'
