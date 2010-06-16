@@ -58,24 +58,24 @@ gem 'erubis'
 gem "inaction_mailer",
   :lib => 'inaction_mailer/force_load',
   :source => 'http://gems.github.com',
-  :env => 'development'
+  :group => 'development'
   
 #==================
 # Test Gems
 #==================
-gem 'rspec', :require => false, :env => 'test'
-gem 'rspec-rails', :require => false, :env => 'test'
-gem 'jferris-mocha', :require => 'mocha', :env => "test"
-gem 'factory_girl', :require => 'factory_girl', :env => "test"
-gem 'shoulda', :require => 'shoulda', :env => "test"
-gem "cucumber", :env => "test"
+gem 'rspec', :require => false, :group => 'test'
+gem 'rspec-rails', :require => false, :group => 'test'
+gem 'jferris-mocha', :require => 'mocha', :group => "test"
+gem 'factory_girl', :require => 'factory_girl', :group => "test"
+gem 'shoulda', :require => 'shoulda', :group => "test"
+gem "cucumber", :group => "test"
 gem 'metric_fu', 
   :lib => 'metric_fu', 
   :source => 'http://gems.github.com',
-  :env => 'test'
+  :group => 'test'
 gem "webrat", 
   :lib => "webrat",
-  :env => 'test'
+  :group => 'test'
 
 rake("gems:install", :sudo => true)
 # rake("gems:unpack")
