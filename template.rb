@@ -41,7 +41,8 @@ end
 
 add_source 'http://gems.github.com/'
 
-gem 'RedCloth', '~> 4.2.2', :require => 'redcloth'
+gem 'RedCloth', '~> 4.2', :require => 'redcloth'
+gem 'bluecloth', '~> 2.0'
 gem 'will_paginate', :require => "will_paginate"
 gem 'paperclip', :require => "paperclip"
 gem "alexdunae-validates_email_format_of", :require => "validates_email_format_of"
