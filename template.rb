@@ -48,7 +48,7 @@ gem "alexdunae-validates_email_format_of", :require => "validates_email_format_o
 gem 'stringex', :require => "stringex"
 #gem 'newrelic_rpm'
 gem 'authlogic', :require => "authlogic"
-gem 'searchlogic', :require => "searchlogic"
+#gem 'searchlogic', :require => "searchlogic"
 gem 'inherited_resources', :require => 'inherited_resources'
 gem 'formtastic', :require => 'formtastic'
 gem 'capistrano'
