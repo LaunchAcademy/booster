@@ -77,8 +77,6 @@ gem "webrat", :require => "webrat", :group => 'test'
 
 run 'bundle install'
 
-prepend_to_file('config/environment.rb', "PROJECT_NAME = 'CHANGE'\r\n")
-
 FileUtils.rm_rf("test")
 
 generate(:rspec)
@@ -137,13 +135,14 @@ file 'app/views/layouts/application.html.erb',
 %q{<!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield(:title) %> || <%= PROJECT_NAME.humanize %></title>
+    <title><%= yield(:title) %> || PROJECT NAME</title>
 
-    <meta name="description" content="<%= yield(:description) || PROJECT_NAME.humanize %>" />
-    <meta name="keywords" content="<%= yield(:keywords) || PROJECT_NAME.humanize %>" />
+    <meta name="description" content="<%= yield(:description) || "PROJECT DESCRIPTION" %>" />
+    <meta name="keywords" content="<%= yield(:keywords) || "PROJECT KEYWORDS" %>" />
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "reset", "under_construction", "960", "silky_buttons" %>    
+    <%= stylesheet_link_tag "reset", "under_construction", "960", "silky_buttons",
+                            "formtastic", "formtastic_changes", "application" %>
     <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
     <!--[if lte IE 6]><%= stylesheet_link_tag "ie6" %><![endif]-->
 
@@ -239,26 +238,6 @@ initializer 'validation_fix.rb',
 # ====================
 
 capify!
-
-file 'config/database.yml', 
-%q{<% PASSWORD_FILE = File.join(Rails.root, '..', '..', 'shared', 'config', 'dbpassword') %>
-
-development:
-  adapter: mysql
-  database: <%= PROJECT_NAME %>_development
-  username: root
-  password: 
-  host: localhost
-  encoding: utf8
-  
-test:
-  adapter: mysql
-  database: <%= PROJECT_NAME %>_test
-  username: root
-  password: 
-  host: localhost
-  encoding: utf8
-}, :force => true
 
 FileUtils.cp('config/database.yml', 'config/database.example.yml')
 
