@@ -90,7 +90,6 @@ plugin 'limerick_rake', :git => "git://github.com/thoughtbot/limerick_rake.git"
 plugin 'superdeploy', :git => "git://github.com/saizai/superdeploy.git"
 plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
 #plugin 'spreadhead', :git => "git://github.com/jeffrafter/spreadhead.git"
-plugin 'silky_buttons', :git => "git://github.com/CodeOfficer/silky-buttons-for-rails.git"
 plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git", :branch => 'rails3'
 
 #====================
@@ -308,8 +307,6 @@ from_repo("dpickett", "under_construction",
   "public/javascripts/jquery.under_construction.js")
   
 generate('formtastic:install')
-
-generate(:silky_buttons)
 
 # ====================
 # FINALIZE
