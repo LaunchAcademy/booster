@@ -263,7 +263,8 @@ end
 # ====================
 
 inside('spec') do
-  FileUtils.touch("factories.rb")
+  run "mkdir support"
+  FileUtils.touch("support/factories.rb")
 end
 
 
