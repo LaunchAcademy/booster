@@ -352,7 +352,6 @@ public/system/*
 config/database.yml
 }, :force => true
 
-run 'find . \( -type d -empty \) -and \( -not -regex ./\.git.* \) -exec touch {}/.gitignore \;'
 git :init
 git :add => "."
 git :commit => "-a -m 'Initial project commit'"
