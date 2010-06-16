@@ -62,7 +62,8 @@ gem 'hoptoad_notifier'
 gem "inaction_mailer",
   :require => 'inaction_mailer/force_load',
   :group => 'development'
-  
+gem 'ruby-debug', :group => 'development'
+
 #==================
 # Test Gems
 #==================
