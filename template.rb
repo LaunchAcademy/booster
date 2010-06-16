@@ -46,7 +46,7 @@ gem 'will_paginate', :require => "will_paginate"
 gem 'paperclip', :require => "paperclip"
 gem "alexdunae-validates_email_format_of", :require => "validates_email_format_of"
 gem 'stringex', :require => "stringex"
-gem 'newrelic_rpm'
+#gem 'newrelic_rpm'
 gem 'authlogic', :require => "authlogic"
 gem 'searchlogic', :require => "searchlogic"
 gem 'inherited_resources', :require => 'inherited_resources'
