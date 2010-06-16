@@ -39,6 +39,8 @@ end
 # GEMS
 #====================
 
+add_source 'http://gems.github.com/'
+
 gem 'RedCloth', '~> 4.2.2', :require => 'redcloth'
 gem 'will_paginate', :require => "will_paginate"
 gem 'paperclip', :require => "paperclip"
@@ -56,8 +58,7 @@ gem 'erubis'
 # Development Gems
 #==================
 gem "inaction_mailer",
-  :lib => 'inaction_mailer/force_load',
-  :source => 'http://gems.github.com',
+  :require => 'inaction_mailer/force_load',
   :group => 'development'
   
 #==================
@@ -69,13 +70,8 @@ gem 'jferris-mocha', :require => 'mocha', :group => "test"
 gem 'factory_girl', :require => 'factory_girl', :group => "test"
 gem 'shoulda', :require => 'shoulda', :group => "test"
 gem "cucumber", :group => "test"
-gem 'metric_fu', 
-  :lib => 'metric_fu', 
-  :source => 'http://gems.github.com',
-  :group => 'test'
-gem "webrat", 
-  :lib => "webrat",
-  :group => 'test'
+gem 'metric_fu', :require => 'metric_fu', :group => 'test'
+gem "webrat", :require => "webrat", :group => 'test'
 
 rake("gems:install", :sudo => true)
 # rake("gems:unpack")
