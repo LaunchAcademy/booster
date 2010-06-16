@@ -239,12 +239,6 @@ initializer 'validation_fix.rb',
 
 capify!
 
-file 'Capfile', 
-%q{load 'deploy' if respond_to?(:namespace) # cap2 differentiator
-Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
-load 'config/deploy'
-}
-
 file 'config/database.yml', 
 %q{<% PASSWORD_FILE = File.join(RAILS_ROOT, '..', '..', 'shared', 'config', 'dbpassword') %>
 
