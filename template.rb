@@ -39,16 +39,16 @@ end
 # GEMS
 #====================
 
-gem 'RedCloth', :lib => 'redcloth', :version => '~> 4.2.2'
-gem 'will_paginate', :lib => "will_paginate"
-gem 'paperclip', :lib => "paperclip"
-gem "alexdunae-validates_email_format_of", :lib => "validates_email_format_of"
-gem 'stringex', :lib => "stringex"
+gem 'RedCloth', '~> 4.2.2', :require => 'redcloth'
+gem 'will_paginate', :require => "will_paginate"
+gem 'paperclip', :require => "paperclip"
+gem "alexdunae-validates_email_format_of", :require => "validates_email_format_of"
+gem 'stringex', :require => "stringex"
 gem 'newrelic_rpm'
-gem 'authlogic', :lib => "authlogic"
-gem 'searchlogic', :lib => "searchlogic"
-gem 'inherited_resources', :lib => 'inherited_resources'
-gem 'formtastic', :lib => 'formtastic'
+gem 'authlogic', :require => "authlogic"
+gem 'searchlogic', :require => "searchlogic"
+gem 'inherited_resources', :require => 'inherited_resources'
+gem 'formtastic', :require => 'formtastic'
 gem 'capistrano'
 gem 'erubis'
 
@@ -63,11 +63,11 @@ gem "inaction_mailer",
 #==================
 # Test Gems
 #==================
-gem 'rspec', :lib => false, :env => 'test'
-gem 'rspec-rails', :lib => false, :env => 'test'
-gem 'jferris-mocha', :lib => 'mocha', :env => "test"
-gem 'factory_girl', :lib => 'factory_girl', :env => "test"
-gem 'shoulda', :lib => 'shoulda', :env => "test"
+gem 'rspec', :require => false, :env => 'test'
+gem 'rspec-rails', :require => false, :env => 'test'
+gem 'jferris-mocha', :require => 'mocha', :env => "test"
+gem 'factory_girl', :require => 'factory_girl', :env => "test"
+gem 'shoulda', :require => 'shoulda', :env => "test"
 gem "cucumber", :env => "test"
 gem 'metric_fu', 
   :lib => 'metric_fu', 
