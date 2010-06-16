@@ -195,13 +195,6 @@ HTTP_ERRORS = [Timeout::Error,
                Net::ProtocolError]
 }
 
-
-initializer 'hoptoad.rb', 
-%q{HoptoadNotifier.configure do |config|
-  config.api_key = 'HOPTOAD-KEY'
-end
-}
-
 initializer 'mocks.rb', 
 %q{# Rails 2 doesn't like mocks
 
