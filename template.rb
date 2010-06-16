@@ -101,14 +101,12 @@ plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git"
 
 file 'app/controllers/application_controller.rb', 
 %q{class ApplicationController < ActionController::Base
-
-  helper :all
-
   protect_from_forgery
+  layout 'application'
 
   include HoptoadNotifier::Catcher
 end
-}
+}, :force => true
 
 file 'app/helpers/application_helper.rb', 
 %q{module ApplicationHelper
@@ -116,7 +114,7 @@ file 'app/helpers/application_helper.rb',
     "#{controller.controller_name} #{controller.controller_name}-#{controller.action_name}"
   end
 end
-}
+}, :force => true
 
 file 'app/views/layouts/_flashes.html.erb', 
 %q{<div id="flash">
@@ -135,39 +133,38 @@ file 'public/stylesheets/ie7.css', ""
 file 'public/stylesheets/ie6.css', ""
 
 file 'app/views/layouts/application.html.erb', 
-%q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+%q{<!DOCTYPE html>
+<html>
   <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <title><%= yield(:title) %> || <%= PROJECT_NAME.humanize %></title>
+
     <meta name="description" content="<%= yield(:description) || PROJECT_NAME.humanize %>" />
     <meta name="keywords" content="<%= yield(:keywords) || PROJECT_NAME.humanize %>" />
-    
-    <%= stylesheet_link_tag "reset", "under_construction", "960", "silky_buttons.css" %>
-    
+    <%= csrf_meta_tag %>
+
+    <%= stylesheet_link_tag "reset", "under_construction", "960", "silky_buttons" %>    
     <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
     <!--[if lte IE 6]><%= stylesheet_link_tag "ie6" %><![endif]-->
-    
+
     <%= yield :extra_header %>
   </head>
   <body class="<%= body_class %>">
     <%= render :partial => 'layouts/flashes' -%>
     <%= yield %>
 
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"
-        type="text/javascript"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"
-        type="text/javascript"></script>
-        
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"
+      type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"
+      type="text/javascript"></script>
+
     <%= javascript_include_tag 'xhr_fix', 
       'jquery.under_construction.js',
       'application' %>
-    
+
     <%= yield :extra_footer %>
   </body>
 </html>
-}
+}, :force => true
 
 #====================
 # INITIALIZERS
