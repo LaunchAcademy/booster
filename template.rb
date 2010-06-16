@@ -64,8 +64,7 @@ gem "inaction_mailer",
 #==================
 # Test Gems
 #==================
-gem 'rspec', :require => false, :group => 'test'
-gem 'rspec-rails', :require => false, :group => 'test'
+gem 'rspec-rails', '2.0.0.beta.12', :require => false, :group => 'test'
 gem 'jferris-mocha', :require => 'mocha', :group => "test"
 gem 'factory_girl', :require => 'factory_girl', :group => "test"
 gem 'shoulda', :require => 'shoulda', :group => "test"
