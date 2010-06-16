@@ -341,19 +341,15 @@ run "rm public/README"
 run "rm public/favicon.ico"
 
 # Set up gitignore and commit base state
-file '.gitignore', <<-END
+file '.gitignore', %q{
+.bundle
 log/*.log
-tmp/*
-.DS\_Store
-.DS_Store
-db/test.sqlite3
-db/development.sqlite3
 /log/*.pid
+tmp/*
 /coverage/*
 public/system/*
 config/database.yml
-*.swp
-END
+}, :force => true
 
 run 'find . \( -type d -empty \) -and \( -not -regex ./\.git.* \) -exec touch {}/.gitignore \;'
 git :init
