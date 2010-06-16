@@ -54,6 +54,7 @@ gem 'inherited_resources', :require => 'inherited_resources'
 gem 'formtastic', :require => 'formtastic'
 gem 'capistrano'
 gem 'erubis'
+gem 'hoptoad_notifier'
 
 #==================
 # Development Gems
@@ -81,6 +82,7 @@ FileUtils.rm_rf("test")
 
 generate(:rspec)
 generate(:blue_ridge)
+generate(:hoptoad, '--api-key abcdefg123456')
 
 #====================
 # PLUGINS
@@ -91,13 +93,7 @@ plugin 'superdeploy', :git => "git://github.com/saizai/superdeploy.git"
 plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
 #plugin 'spreadhead', :git => "git://github.com/jeffrafter/spreadhead.git"
 plugin 'silky_buttons', :git => "git://github.com/CodeOfficer/silky-buttons-for-rails.git"
-plugin 'hoptoad_notifier', :git => "git://github.com/thoughtbot/hoptoad_notifier.git"
 plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git"
-
-#rm routes file because it prepends rather than appends
-spreadhead_routes_file = "vendor/plugins/spreadhead/config/spreadhead_routes.rb"
-FileUtils.rm_rf("vendor/plugins/spreadhead/config/spreadhead_routes.rb")
-FileUtils.touch("vendor/plugins/spreadhead/config/spreadhead_routes.rb")
 
 #====================
 # APP
