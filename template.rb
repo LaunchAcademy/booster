@@ -276,18 +276,6 @@ file 'config/initializers/debugging.rb',
 end
 }
 
-file 'config/routes.rb',
-%q{
-  ActionController::Routing::Routes.draw do |map|
-
-    map.resources :pages, :controller => 'spreadhead/pages'
-    map.connect '*url', :controller => 'spreadhead/pages', :action => 'show'
-
-    map.connect ':controller/:action/:id'
-    map.connect ':controller/:action/:id.:format'
-  end
-}, :collision => :force
-
 inside('db') do
   run "mkdir bootstrap"
 end
