@@ -317,7 +317,7 @@ generate(:silky_buttons)
 # ====================
 
 run "rm public/index.html"
-run "rm public/README"
+run "rm README"
 run "rm public/favicon.ico"
 
 # Set up gitignore and commit base state
