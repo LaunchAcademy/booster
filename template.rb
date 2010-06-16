@@ -276,17 +276,6 @@ file 'config/initializers/debugging.rb',
 end
 }
 
-file 'config/initializers/spreadhead.rb',
-%q{
-  module Spreadhead
-    module PagesAuth
-      def self.filter(controller)
-        controller.send(:head, 403)
-      end
-    end  
-  end
-}
-
 file 'config/routes.rb',
 %q{
   ActionController::Routing::Routes.draw do |map|
