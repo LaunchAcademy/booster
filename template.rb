@@ -72,8 +72,7 @@ gem "cucumber", :group => "test"
 gem 'metric_fu', :require => 'metric_fu', :group => 'test'
 gem "webrat", :require => "webrat", :group => 'test'
 
-rake("gems:install", :sudo => true)
-# rake("gems:unpack")
+run 'bundle install'
 
 prepend_to_file('config/environment.rb', "PROJECT_NAME = 'CHANGE'\r\n")
 
