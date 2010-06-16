@@ -51,7 +51,7 @@ gem 'stringex', :require => "stringex"
 gem 'authlogic', :require => "authlogic"
 #gem 'searchlogic', :require => "searchlogic"
 gem 'inherited_resources', :require => 'inherited_resources'
-gem 'formtastic', :require => 'formtastic'
+gem 'formtastic', :git => 'http://github.com/justinfrench/formtastic.git', :branch => 'rails3'
 gem 'capistrano'
 gem 'erubis'
 gem 'hoptoad_notifier'
@@ -329,7 +329,7 @@ from_repo("dpickett", "under_construction",
   "javascripts/jquery.under_construction.js",   
   "public/javascripts/jquery.under_construction.js")
   
-generate(:formtastic_stylesheets)
+generate('formtastic:install')
 
 generate(:silky_buttons)
 
