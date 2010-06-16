@@ -240,7 +240,7 @@ initializer 'validation_fix.rb',
 capify!
 
 file 'config/database.yml', 
-%q{<% PASSWORD_FILE = File.join(RAILS_ROOT, '..', '..', 'shared', 'config', 'dbpassword') %>
+%q{<% PASSWORD_FILE = File.join(Rails.root, '..', '..', 'shared', 'config', 'dbpassword') %>
 
 development:
   adapter: mysql
@@ -257,7 +257,7 @@ test:
   password: 
   host: localhost
   encoding: utf8
-}
+}, :force => true
 
 FileUtils.cp('config/database.yml', 'config/database.example.yml')
 
