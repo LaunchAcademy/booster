@@ -55,6 +55,9 @@ gem 'formtastic', :git => 'http://github.com/justinfrench/formtastic.git', :bran
 gem 'capistrano'
 gem 'erubis'
 gem 'hoptoad_notifier'
+gem 'haml'
+gem 'compass'
+gem 'compass-960-plugin'
 
 #==================
 # Development Gems
@@ -308,6 +311,8 @@ from_repo("dpickett", "under_construction",
   "public/javascripts/jquery.under_construction.js")
   
 generate('formtastic:install')
+
+run 'compass init rails . --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --using 960.gs'
 
 # ====================
 # FINALIZE
