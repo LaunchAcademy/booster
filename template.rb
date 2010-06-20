@@ -52,7 +52,6 @@ gem 'will_paginate', :require => "will_paginate"
 gem 'paperclip', :require => "paperclip"
 gem "alexdunae-validates_email_format_of", :require => "validates_email_format_of"
 gem 'stringex', :require => "stringex"
-gem 'authlogic', :require => "authlogic"
 gem 'inherited_resources', :require => 'inherited_resources'
 gem 'formtastic', :git => 'http://github.com/justinfrench/formtastic.git', :branch => 'rails3'
 gem 'capistrano'
@@ -61,6 +60,7 @@ gem 'hoptoad_notifier'
 gem 'haml'
 gem 'compass'
 gem 'compass-960-plugin'
+gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
 
 group :development do
   gem "inaction_mailer", :require => 'inaction_mailer/force_load'
@@ -84,6 +84,7 @@ FileUtils.rm_rf("test")
 
 generate(:rspec)
 generate(:hoptoad, '--api-key abcdefg123456')
+generate('devise:install')
 
 #====================
 # PLUGINS
