@@ -101,10 +101,8 @@ plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git", :branc
 
 file 'app/controllers/application_controller.rb', 
 %q{class ApplicationController < ActionController::Base
-
-  helper :all
-
   protect_from_forgery
+  layout 'application'
 
   include HoptoadNotifier::Catcher
 end
