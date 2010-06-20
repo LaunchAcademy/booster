@@ -321,7 +321,7 @@ run 'compass init rails . --css-dir=public/stylesheets/compiled --sass-dir=app/s
 run "rm public/index.html"
 run "rm README"
 
-file '.rvmrc', "rvm 1.8.7@#{ARGV[0]}"
+file '.rvmrc', "rvm ree@#{ARGV[0]}"
 
 # Set up gitignore and commit base state
 file '.gitignore', %q{
