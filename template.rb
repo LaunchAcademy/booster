@@ -101,8 +101,10 @@ plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git", :branc
 
 file 'app/controllers/application_controller.rb', 
 %q{class ApplicationController < ActionController::Base
+
+  helper :all
+
   protect_from_forgery
-  layout 'application'
 
   include HoptoadNotifier::Catcher
 end
@@ -133,9 +135,12 @@ file 'public/stylesheets/ie7.css', ""
 file 'public/stylesheets/ie6.css', ""
 
 file 'app/views/layouts/application.html.erb', 
-%q{<!DOCTYPE html>
-<html>
+%q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
     <title><%= yield(:title) %> || PROJECT NAME</title>
 
     <meta name="description" content="<%= yield(:description) || "PROJECT DESCRIPTION" %>" />
