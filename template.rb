@@ -39,7 +39,12 @@ end
 # GEMS
 #====================
 
-add_source 'http://gems.github.com/'
+file 'Gemfile', <<-END, :force => true
+source 'http://rubygems.org/'
+source 'http://gems.github.com/'
+
+gem 'rails', '3.0.0.beta4'
+gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'RedCloth', '~> 4.2', :require => 'redcloth'
 gem 'bluecloth', '~> 2.0'
@@ -47,9 +52,7 @@ gem 'will_paginate', :require => "will_paginate"
 gem 'paperclip', :require => "paperclip"
 gem "alexdunae-validates_email_format_of", :require => "validates_email_format_of"
 gem 'stringex', :require => "stringex"
-#gem 'newrelic_rpm'
 gem 'authlogic', :require => "authlogic"
-#gem 'searchlogic', :require => "searchlogic"
 gem 'inherited_resources', :require => 'inherited_resources'
 gem 'formtastic', :git => 'http://github.com/justinfrench/formtastic.git', :branch => 'rails3'
 gem 'capistrano'
@@ -59,24 +62,21 @@ gem 'haml'
 gem 'compass'
 gem 'compass-960-plugin'
 
-#==================
-# Development Gems
-#==================
-gem "inaction_mailer",
-  :require => 'inaction_mailer/force_load',
-  :group => 'development'
-gem 'ruby-debug', :group => 'development'
+group :development do
+  gem "inaction_mailer", :require => 'inaction_mailer/force_load'
+  gem 'ruby-debug'
+end
 
-#==================
-# Test Gems
-#==================
-gem 'rspec-rails', '2.0.0.beta.12', :require => false, :group => 'test'
-gem 'jferris-mocha', :require => 'mocha', :group => "test"
-gem 'factory_girl', :require => 'factory_girl', :group => "test"
-gem 'shoulda', :require => 'shoulda', :group => "test"
-gem "cucumber", :group => "test"
-gem 'metric_fu', :require => 'metric_fu', :group => 'test'
-gem "webrat", :require => "webrat", :group => 'test'
+group :test do
+  gem 'rspec-rails', '2.0.0.beta.12', :require => false
+  gem 'jferris-mocha', :require => 'mocha'
+  gem 'factory_girl', :require => 'factory_girl'
+  gem 'shoulda', :require => 'shoulda'
+  gem "cucumber"
+  gem 'metric_fu', :require => 'metric_fu'
+  gem "webrat", :require => "webrat"
+end
+END
 
 run 'bundle install'
 
