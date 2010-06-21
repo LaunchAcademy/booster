@@ -72,7 +72,7 @@ group :test do
   gem 'jferris-mocha', :require => 'mocha'
   gem 'factory_girl', :require => 'factory_girl'
   gem 'shoulda', :require => 'shoulda'
-  gem "cucumber"
+  gem "cucumber-rails"
   gem 'metric_fu', :require => 'metric_fu'
   gem "webrat", :require => "webrat"
 end
@@ -85,6 +85,7 @@ FileUtils.rm_rf("test")
 generate(:rspec)
 generate(:hoptoad, '--api-key abcdefg123456')
 generate('devise:install')
+generate('cucumber:install', '--capybara --rspec')
 
 #====================
 # PLUGINS
@@ -281,11 +282,6 @@ file 'public/javascripts/xhr_fix.js',
     "text/javascript")} 
 });
 }
-
-# ====================
-# Cucumber
-# ====================
-generate(:cucumber)
 
 # ====================
 # CSS
