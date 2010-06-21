@@ -227,9 +227,8 @@ end
 }
 
 initializer 'validation_fix.rb',
-%q{
-  ActionView::Base.field_error_proc = Proc.new { |html_tag, instance|
-  "<span class=\"fieldWithErrors\">#{html_tag}</span>" } 
+%q{ActionView::Base.field_error_proc = Proc.new { |html_tag, instance|
+  "<span class=\"fieldWithErrors\">#{html_tag}</span>".html_safe }
 }
 
 # ====================
