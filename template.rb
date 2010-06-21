@@ -323,6 +323,8 @@ run "rm README"
 
 file '.rvmrc', "rvm ree@#{ARGV[0]}"
 
+rake 'db:migrate'
+
 # Set up gitignore and commit base state
 file '.gitignore', %q{
 .bundle
