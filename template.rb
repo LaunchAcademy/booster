@@ -72,7 +72,7 @@ group :test do
   gem 'jferris-mocha', :require => 'mocha'
   gem 'factory_girl', :require => 'factory_girl'
   gem 'shoulda', :require => 'shoulda'
-  gem "webrat", :require => "webrat"
+  gem "capybara"
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
@@ -87,7 +87,7 @@ FileUtils.rm_rf("test")
 generate(:rspec)
 generate(:hoptoad, '--api-key abcdefg123456')
 generate('devise:install')
-generate('cucumber:install', '--webrat --rspec')
+generate('cucumber:install', '--capybara --rspec')
 
 #====================
 # PLUGINS
