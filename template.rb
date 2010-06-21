@@ -332,6 +332,7 @@ tmp/*
 /coverage/*
 public/system/*
 config/database.yml
+db/*.sqlite3
 }, :force => true
 
 git :init
