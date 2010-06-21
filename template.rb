@@ -48,10 +48,10 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'RedCloth', '~> 4.2', :require => 'redcloth'
 gem 'bluecloth', '~> 2.0'
-gem 'will_paginate', :require => "will_paginate"
-gem 'paperclip', :require => "paperclip"
+gem 'will_paginate'
+gem 'paperclip'
 gem "alexdunae-validates_email_format_of", :require => "validates_email_format_of"
-gem 'stringex', :require => "stringex"
+gem 'stringex'
 gem 'inherited_resources', :require => 'inherited_resources'
 gem 'formtastic', :git => 'http://github.com/justinfrench/formtastic.git', :branch => 'rails3'
 gem 'capistrano'
@@ -69,9 +69,9 @@ end
 
 group :test do
   gem 'rspec-rails', '2.0.0.beta.12', :require => false
-  gem 'jferris-mocha', :require => 'mocha'
-  gem 'factory_girl', :require => 'factory_girl'
-  gem 'shoulda', :require => 'shoulda'
+  gem 'jferris-mocha'
+  gem 'factory_girl'
+  gem 'shoulda'
   gem "capybara"
   gem 'database_cleaner'
   gem 'cucumber-rails'
