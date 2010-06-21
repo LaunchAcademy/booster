@@ -72,9 +72,11 @@ group :test do
   gem 'jferris-mocha', :require => 'mocha'
   gem 'factory_girl', :require => 'factory_girl'
   gem 'shoulda', :require => 'shoulda'
-  gem "cucumber-rails"
-  gem 'metric_fu', :require => 'metric_fu'
   gem "webrat", :require => "webrat"
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'cucumber'
+  gem 'launchy'
 end
 END
 
@@ -85,7 +87,7 @@ FileUtils.rm_rf("test")
 generate(:rspec)
 generate(:hoptoad, '--api-key abcdefg123456')
 generate('devise:install')
-generate('cucumber:install', '--capybara --rspec')
+generate('cucumber:install', '--webrat --rspec')
 
 #====================
 # PLUGINS
@@ -100,15 +102,6 @@ plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git", :branc
 #====================
 # APP
 #====================
-
-file 'app/controllers/application_controller.rb', 
-%q{class ApplicationController < ActionController::Base
-  protect_from_forgery
-  layout 'application'
-
-  include HoptoadNotifier::Catcher
-end
-}, :force => true
 
 file 'app/helpers/application_helper.rb', 
 %q{module ApplicationHelper
@@ -147,8 +140,8 @@ file 'app/views/layouts/application.html.erb',
     <meta name="keywords" content="<%= yield(:keywords) || "PROJECT KEYWORDS" %>" />
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "reset", "under_construction", "960", "silky_buttons",
-                            "formtastic", "formtastic_changes", "application" %>
+    <%= stylesheet_link_tag "compiled/grid", "compiled/text", "under_construction",
+                            "formtastic", "formtastic_changes", "compiled/application" %>
     <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
     <!--[if lte IE 6]><%= stylesheet_link_tag "ie6" %><![endif]-->
 
@@ -287,21 +280,6 @@ file 'public/javascripts/xhr_fix.js',
 # CSS
 # ====================
 
-#Eric Meyer's Reset
-download("http://meyerweb.com/eric/tools/css/reset/reset.css", 
-  "public/stylesheets/reset.css")
-  
-#960.gs
-download("http://github.com/nathansmith/960-Grid-System/raw/master/code/css/960.css", 
-  "public/stylesheets/960.css")
-
-run "mkdir public/images/grid"
-download("http://github.com/nathansmith/960-Grid-System/raw/master/code/img/12_col.gif",
-  "public/images/grid/12_col.gif")
-
-download("http://github.com/nathansmith/960-Grid-System/raw/master/code/img/16_col.gif",
-  "public/images/grid/16_col.gif")
-
 from_repo("dpickett", "under_construction",  
   "stylesheets/under_construction.css",
   "public/stylesheets/under_construction.css")
@@ -312,7 +290,7 @@ from_repo("dpickett", "under_construction",
   
 generate('formtastic:install')
 
-run 'compass init rails . --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --using 960.gs'
+run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --using 960 --syntax scss'
 
 # ====================
 # FINALIZE
