@@ -94,10 +94,7 @@ generate('cucumber:install', '--capybara --rspec')
 #====================
 
 plugin 'limerick_rake', :git => "git://github.com/thoughtbot/limerick_rake.git"
-plugin 'superdeploy', :git => "git://github.com/saizai/superdeploy.git"
 plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
-#plugin 'spreadhead', :git => "git://github.com/jeffrafter/spreadhead.git"
-plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git", :branch => 'rails3'
 
 #====================
 # APP
