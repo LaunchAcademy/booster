@@ -43,7 +43,7 @@ file 'Gemfile', <<-END, :force => true
 source 'http://rubygems.org/'
 source 'http://gems.github.com/'
 
-gem 'rails', '3.0.0.beta4'
+gem 'rails', '3.0.0.rc'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'RedCloth', '~> 4.2', :require => 'redcloth'
