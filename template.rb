@@ -194,31 +194,6 @@ HTTP_ERRORS = [Timeout::Error,
                Net::ProtocolError]
 }
 
-initializer 'mocks.rb', 
-%q{# Rails 2 doesn't like mocks
-
-# This callback will run before every request to a mock in development mode, 
-# or before the first server request in production. 
-
-Rails.configuration.to_prepare do
-  Dir[File.join(RAILS_ROOT, 'spec', 'mocks', RAILS_ENV, '*.rb')].each do |f|
-    load f
-  end
-end
-}
-
-initializer 'requires.rb', 
-%q{require 'redcloth'
-
-Dir[File.join(RAILS_ROOT, 'lib', 'extensions', '*.rb')].each do |f|
-  require f
-end
-
-Dir[File.join(RAILS_ROOT, 'lib', '*.rb')].each do |f|
-  require f
-end
-}
-
 initializer 'time_formats.rb', 
 %q{# Example time formats
 { :short_date => "%x", :long_date => "%a, %b %d, %Y" }.each do |k, v|
