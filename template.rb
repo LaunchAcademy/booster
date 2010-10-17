@@ -70,7 +70,9 @@ group :test do
   gem 'rspec-rails', '2.0.0', :require => false
   gem 'jferris-mocha'
   gem 'factory_girl'
-  gem 'shoulda'
+  gem "remarkable", ">=4.0.0.alpha4"
+  gem "remarkable_activemodel", ">=4.0.0.alpha4"
+  gem "remarkable_activerecord", ">=4.0.0.alpha4"
   gem "capybara"
   gem 'database_cleaner'
   gem 'cucumber-rails'
