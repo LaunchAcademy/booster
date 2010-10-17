@@ -52,4 +52,5 @@ h2. JavaScript
 
 * JQuery (google hosted)
 * JQuery UI (google hosted)
+* JQuery Rails.js
 * under_construction

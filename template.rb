@@ -120,6 +120,7 @@ run 'rm public/javascripts/prototype.js'
 run 'rm public/javascripts/effects.js'
 run 'rm public/javascripts/dragdrop.js'
 run 'rm public/javascripts/controls.js'
+run 'rm public/javascripts/rails.js'
 
 file 'public/stylesheets/ie7.css', ""
 file 'public/stylesheets/ie6.css', ""
@@ -266,6 +267,11 @@ from_repo("dpickett", "under_construction",
   "javascripts/jquery.under_construction.js",   
   "public/javascripts/jquery.under_construction.js")
   
+# ==============
+# JS
+# ==============
+from_repo("rails", "jquery-ujs", "src/rails.js")  
+
 generate('simple_form:install')
 
 run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --using 960 --syntax scss'
