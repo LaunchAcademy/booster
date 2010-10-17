@@ -62,7 +62,7 @@ gem 'compass-960-plugin'
 gem 'devise'
 
 group :development do
-  gem "inaction_mailer", :require => 'inaction_mailer/force_load'
+  gem 'pickler'
   gem 'ruby-debug'
 end
 
