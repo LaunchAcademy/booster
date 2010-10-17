@@ -149,9 +149,9 @@ file 'app/views/layouts/application.html.erb',
     <%= render :partial => 'layouts/flashes' -%>
     <%= yield %>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
       type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"
       type="text/javascript"></script>
 
     <%= javascript_include_tag 'xhr_fix', 
