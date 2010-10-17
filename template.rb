@@ -94,7 +94,6 @@ generate('cucumber:install', '--capybara --rspec')
 # PLUGINS
 #====================
 
-plugin 'limerick_rake', :git => "git://github.com/thoughtbot/limerick_rake.git"
 plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
 
 #====================
@@ -167,7 +166,7 @@ file 'app/views/layouts/application.html.erb',
 # INITIALIZERS
 #====================
 
-initializer 'action_mailer_configs.rb', 
+initializer 'smtp.rb', 
 %q{ActionMailer::Base.smtp_settings = {
     :address => "",
     :port    => 25,
@@ -204,16 +203,8 @@ initializer 'validation_fix.rb',
   "<span class=\"fieldWithErrors\">#{html_tag}</span>".html_safe }
 }
 
-# ====================
-# CONFIG
-# ====================
-
-capify!
-
-FileUtils.cp('config/database.yml', 'config/database.example.yml')
-
-file 'config/initializers/debugging.rb',
-%q{if %w(development test).include?(RAILS_ENV)
+initializer 'debugging.rb',
+%q{if %w(development test).include?(Rails.env)
   begin
     SCRIPT_LINES__
   rescue NameError
@@ -227,9 +218,14 @@ file 'config/initializers/debugging.rb',
 end
 }
 
-inside('db') do
-  run "mkdir bootstrap"
-end
+# ====================
+# CONFIG
+# ====================
+
+capify!
+
+FileUtils.cp('config/database.yml', 'config/database.example.yml')
+
 
 # ====================
 # TEST
@@ -260,7 +256,7 @@ from_repo("dpickett", "under_construction",
   "javascripts/jquery.under_construction.js",   
   "public/javascripts/jquery.under_construction.js")
   
-generate('formtastic:install')
+generate('simple_form:install')
 
 run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --using 960 --syntax scss'
 
@@ -285,6 +281,10 @@ tmp/*
 public/system/*
 config/database.yml
 db/*.sqlite3
+*.swp
+*.swo
+.DS_Store
+**/.DS_STORE
 }, :force => true
 
 git :init
