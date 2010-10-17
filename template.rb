@@ -132,7 +132,7 @@ file 'app/views/layouts/application.html.erb',
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
-    <title><%= yield(:title) %> || PROJECT NAME</title>
+    <title><%= yield(:title) %></title>
 
     <meta name="description" content="<%= yield(:description) || "PROJECT DESCRIPTION" %>" />
     <meta name="keywords" content="<%= yield(:keywords) || "PROJECT KEYWORDS" %>" />
