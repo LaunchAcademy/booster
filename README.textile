@@ -13,8 +13,7 @@ h2. Gems
 
 * Authologic
 * Inherited Resources
-* Formtastic
-* Searchlogic
+* Simple Form
 * Paperclip
 * Hoptoad Notifier
 * metric_fu
@@ -23,22 +22,16 @@ h2. Gems
 h2. Plugins
 
 * tab_menu
-* limerick_rake
-* superdeploy
-* codeofficer's silky_buttons generator
-* rails_xss
 
 h2. Testing
 
 * Rspec
-* blue-ridge
-* Shoulda
+* Remarkable
 * factory_girl
 * cucumber
-* webrat
+* capybara
 * jferris's mocha fork (spies)
 * metric_fu
-* pending
 
 h2. Initializers
 
