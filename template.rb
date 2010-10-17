@@ -43,24 +43,23 @@ file 'Gemfile', <<-END, :force => true
 source 'http://rubygems.org/'
 source 'http://gems.github.com/'
 
-gem 'rails', '3.0.0.rc'
+gem 'rails', '3.0.1'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'RedCloth', '~> 4.2', :require => 'redcloth'
 gem 'bluecloth', '~> 2.0'
 gem 'will_paginate'
 gem 'paperclip'
-gem "alexdunae-validates_email_format_of", :require => "validates_email_format_of"
 gem 'stringex'
-gem 'inherited_resources', :require => 'inherited_resources'
-gem 'formtastic', :git => 'http://github.com/justinfrench/formtastic.git', :branch => 'rails3'
+gem 'inherited_resources'
+gem 'simple_form'
 gem 'capistrano'
 gem 'erubis'
 gem 'hoptoad_notifier'
 gem 'haml'
 gem 'compass'
 gem 'compass-960-plugin'
-gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
+gem 'devise'
 
 group :development do
   gem "inaction_mailer", :require => 'inaction_mailer/force_load'
@@ -68,7 +67,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '2.0.0.beta.12', :require => false
+  gem 'rspec-rails', '2.0.0', :require => false
   gem 'jferris-mocha'
   gem 'factory_girl'
   gem 'shoulda'
