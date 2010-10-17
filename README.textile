@@ -18,6 +18,7 @@ h2. Gems
 * Hoptoad Notifier
 * metric_fu
 * inaction_mailer for dev
+* whereuat
 
 h2. Plugins
 
