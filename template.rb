@@ -90,6 +90,13 @@ generate(:hoptoad, '--api-key abcdefg123456')
 generate('devise:install')
 generate('cucumber:install', '--capybara --rspec')
 
+file 'features/support/factory_girl.rb',
+%q{require "factory_girl"
+
+require Rails.root.join("spec/support/factories")
+require "factory_girl/step_definitions"
+}
+
 #====================
 # PLUGINS
 #====================
