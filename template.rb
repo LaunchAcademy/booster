@@ -48,7 +48,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'RedCloth', '~> 4.2', :require => 'redcloth'
 gem 'bluecloth', '~> 2.0'
-gem 'will_paginate'
+gem 'will_paginate', '3.0.pre2'
 gem 'paperclip'
 gem 'friendly_id'
 gem 'inherited_resources'
