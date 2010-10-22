@@ -85,7 +85,8 @@ run 'bundle install'
 
 FileUtils.rm_rf("test")
 
-generate(:rspec)
+generate("rspec:install")
+
 generate(:hoptoad, '--api-key abcdefg123456')
 generate('devise:install')
 generate('cucumber:install', '--capybara --rspec')
