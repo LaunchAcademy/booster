@@ -11,7 +11,7 @@ h1. Enlightened Template (Rails Template from Enlight Solutions)
   
 h2. Gems
 
-* Authologic
+* Devise
 * Inherited Resources
 * Simple Form
 * Paperclip
