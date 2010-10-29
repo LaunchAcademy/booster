@@ -279,7 +279,7 @@ from_repo("dpickett", "under_construction",
 # ==============
 # JS
 # ==============
-from_repo("rails", "jquery-ujs", "src/rails.js")  
+from_repo("rails", "jquery-ujs", "src/rails.js", "public/javascripts/rails.js")  
 
 generate('simple_form:install')
 
