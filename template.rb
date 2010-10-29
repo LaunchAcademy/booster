@@ -62,12 +62,13 @@ gem 'devise'
 gem 'whereuat'
 
 group :development do
+  gem 'rspec-rails', '2.0.1'
   gem 'pickler'
   gem 'ruby-debug'
 end
 
 group :test do
-  gem 'rspec-rails', '2.0.0', :require => false
+  gem 'rspec-rails', '2.0.1'
   gem 'jferris-mocha'
   gem 'factory_girl'
   gem "remarkable", ">=4.0.0.alpha4"
