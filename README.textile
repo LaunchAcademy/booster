@@ -13,32 +13,26 @@ h2. Gems
 
 * Authologic
 * Inherited Resources
-* Formtastic
-* Searchlogic
+* Simple Form
 * Paperclip
 * Hoptoad Notifier
 * metric_fu
 * inaction_mailer for dev
+* whereuat
 
 h2. Plugins
 
 * tab_menu
-* limerick_rake
-* superdeploy
-* codeofficer's silky_buttons generator
-* rails_xss
 
 h2. Testing
 
 * Rspec
-* blue-ridge
-* Shoulda
+* Remarkable
 * factory_girl
 * cucumber
-* webrat
+* capybara
 * jferris's mocha fork (spies)
 * metric_fu
-* pending
 
 h2. Initializers
 
@@ -58,4 +52,11 @@ h2. JavaScript
 
 * JQuery (google hosted)
 * JQuery UI (google hosted)
+* JQuery Rails.js
 * under_construction
+
+h3. TODO
+
+* Break out files
+* jammit
+* lemonade?

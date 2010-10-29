@@ -35,91 +35,79 @@ def from_repo(github_user, project_name, from, to = from.split("/").last)
   download("http://github.com/#{github_user}/#{project_name}/raw/master/#{from}", to)
 end
 
+#====================
+# GEMS
+#====================
+
+file 'Gemfile', <<-END, :force => true
+source 'http://rubygems.org/'
+source 'http://gems.github.com/'
+
+gem 'rails', '3.0.1'
+gem 'sqlite3-ruby', :require => 'sqlite3'
+
+gem 'RedCloth', '~> 4.2', :require => 'redcloth'
+gem 'bluecloth', '~> 2.0'
+gem 'will_paginate', '3.0.pre2'
+gem 'paperclip'
+gem 'friendly_id'
+gem 'inherited_resources'
+gem 'simple_form'
+gem 'erubis'
+gem 'hoptoad_notifier'
+gem 'haml'
+gem 'compass'
+gem 'compass-960-plugin'
+gem 'devise'
+gem 'whereuat'
+
+group :development do
+  gem 'rspec-rails', '2.0.1'
+  gem 'pickler'
+  gem 'ruby-debug'
+end
+
+group :test do
+  gem 'rspec-rails', '2.0.1'
+  gem 'jferris-mocha'
+  gem 'factory_girl'
+  gem "remarkable", ">=4.0.0.alpha4"
+  gem "remarkable_activemodel", ">=4.0.0.alpha4"
+  gem "remarkable_activerecord", ">=4.0.0.alpha4"
+  gem "capybara"
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'cucumber'
+  gem 'launchy'
+end
+END
+
+run 'bundle install'
+
+FileUtils.rm_rf("test")
+
+generate("rspec:install")
+
+generate(:hoptoad, '--api-key abcdefg123456')
+generate('devise:install')
+generate('cucumber:install', '--capybara --rspec')
+
+file 'features/support/factory_girl.rb',
+%q{require "factory_girl"
+
+require Rails.root.join("spec/support/factories")
+require "factory_girl/step_definitions"
+}
 
 #====================
 # PLUGINS
 #====================
 
-plugin 'limerick_rake', :git => "git://github.com/thoughtbot/limerick_rake.git"
-plugin 'superdeploy', :git => "git://github.com/saizai/superdeploy.git"
 plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
-plugin 'spreadhead', :git => "git://github.com/jeffrafter/spreadhead.git"
-plugin 'silky_buttons', :git => "git://github.com/CodeOfficer/silky-buttons-for-rails.git"
-plugin 'rails_xss', :git => "git://github.com/NZKoz/rails_xss.git"
-plugin 'blue_ridge', :git => "git://github.com/relevance/blue-ridge.git"
 
-#rm routes file because it prepends rather than appends
-spreadhead_routes_file = "vendor/plugins/spreadhead/config/spreadhead_routes.rb"
-FileUtils.rm_rf("vendor/plugins/spreadhead/config/spreadhead_routes.rb")
-FileUtils.touch("vendor/plugins/spreadhead/config/spreadhead_routes.rb")
-
-#====================
-# GEMS
-#====================
-
-gem 'RedCloth', :lib => 'redcloth', :version => '~> 4.2.2'
-gem 'will_paginate', :lib => "will_paginate"
-gem 'paperclip', :lib => "paperclip"
-gem "alexdunae-validates_email_format_of", :lib => "validates_email_format_of"
-gem 'stringex', :lib => "stringex"
-gem 'newrelic_rpm'
-gem 'authlogic', :lib => "authlogic"
-gem 'searchlogic', :lib => "searchlogic"
-gem 'inherited_resources', :lib => 'inherited_resources', :version => '1.0.3'
-gem 'hoptoad_notifier'
-gem 'formtastic', :lib => 'formtastic'
-gem 'capistrano'
-gem 'erubis'
-
-#==================
-# Development Gems
-#==================
-gem "inaction_mailer",
-  :lib => 'inaction_mailer/force_load',
-  :source => 'http://gems.github.com',
-  :env => 'development'
-  
-#==================
-# Test Gems
-#==================
-gem 'rspec', :lib => false, :env => 'test'
-gem 'rspec-rails', :lib => false, :env => 'test'
-gem 'jferris-mocha', :lib => 'mocha', :env => "test"
-gem 'factory_girl', :lib => 'factory_girl', :env => "test"
-gem 'shoulda', :lib => 'shoulda', :env => "test"
-gem "cucumber", :env => "test"
-gem 'metric_fu', 
-  :lib => 'metric_fu', 
-  :source => 'http://gems.github.com',
-  :env => 'test'
-gem "webrat", 
-  :lib => "webrat",
-  :env => 'test'
-
-rake("gems:install", :sudo => true)
-# rake("gems:unpack")
-
-prepend_to_file('config/environment.rb', "PROJECT_NAME = 'CHANGE'\r\n")
-
-FileUtils.rm_rf("test")
-
-generate(:rspec)
-generate(:blue_ridge)
-#
 #====================
 # APP
 #====================
-
-file 'app/controllers/application_controller.rb', 
-%q{class ApplicationController < ActionController::Base
-
-  helper :all
-
-  protect_from_forgery
-
-  include HoptoadNotifier::Catcher
-end
-}
 
 file 'app/helpers/application_helper.rb', 
 %q{module ApplicationHelper
@@ -127,7 +115,7 @@ file 'app/helpers/application_helper.rb',
     "#{controller.controller_name} #{controller.controller_name}-#{controller.action_name}"
   end
 end
-}
+}, :force => true
 
 file 'app/views/layouts/_flashes.html.erb', 
 %q{<div id="flash">
@@ -141,6 +129,7 @@ run 'rm public/javascripts/prototype.js'
 run 'rm public/javascripts/effects.js'
 run 'rm public/javascripts/dragdrop.js'
 run 'rm public/javascripts/controls.js'
+run 'rm public/javascripts/rails.js'
 
 file 'public/stylesheets/ie7.css', ""
 file 'public/stylesheets/ie6.css', ""
@@ -151,40 +140,44 @@ file 'app/views/layouts/application.html.erb',
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title><%= yield(:title) %> || <%= PROJECT_NAME.humanize %></title>
-    <meta name="description" content="<%= yield(:description) || PROJECT_NAME.humanize %>" />
-    <meta name="keywords" content="<%= yield(:keywords) || PROJECT_NAME.humanize %>" />
-    
-    <%= stylesheet_link_tag "reset", "under_construction", "960", "silky_buttons.css" %>
-    
+
+    <title><%= yield(:title) %></title>
+
+    <meta name="description" content="<%= yield(:description) || "PROJECT DESCRIPTION" %>" />
+    <meta name="keywords" content="<%= yield(:keywords) || "PROJECT KEYWORDS" %>" />
+    <%= csrf_meta_tag %>
+
+    <%= stylesheet_link_tag "compiled/grid", "compiled/text", "under_construction",
+                            "formtastic", "formtastic_changes", "compiled/application" %>
     <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
     <!--[if lte IE 6]><%= stylesheet_link_tag "ie6" %><![endif]-->
-    
+
     <%= yield :extra_header %>
   </head>
   <body class="<%= body_class %>">
     <%= render :partial => 'layouts/flashes' -%>
     <%= yield %>
 
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"
-        type="text/javascript"></script>
-      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"
-        type="text/javascript"></script>
-        
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"
+      type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"
+      type="text/javascript"></script>
+
     <%= javascript_include_tag 'xhr_fix', 
       'jquery.under_construction.js',
       'application' %>
-    
+
     <%= yield :extra_footer %>
+    <%= whereuat unless Rails.env == 'production' %>
   </body>
 </html>
-}
+}, :force => true
 
 #====================
 # INITIALIZERS
 #====================
 
-initializer 'action_mailer_configs.rb', 
+initializer 'smtp.rb', 
 %q{ActionMailer::Base.smtp_settings = {
     :address => "",
     :port    => 25,
@@ -209,87 +202,29 @@ HTTP_ERRORS = [Timeout::Error,
                Net::ProtocolError]
 }
 
-
-initializer 'hoptoad.rb', 
-%q{HoptoadNotifier.configure do |config|
-  config.api_key = 'HOPTOAD-KEY'
-end
-}
-
-initializer 'mocks.rb', 
-%q{# Rails 2 doesn't like mocks
-
-# This callback will run before every request to a mock in development mode, 
-# or before the first server request in production. 
-
-Rails.configuration.to_prepare do
-  Dir[File.join(RAILS_ROOT, 'spec', 'mocks', RAILS_ENV, '*.rb')].each do |f|
-    load f
-  end
-end
-}
-
-initializer 'requires.rb', 
-%q{require 'redcloth'
-
-Dir[File.join(RAILS_ROOT, 'lib', 'extensions', '*.rb')].each do |f|
-  require f
-end
-
-Dir[File.join(RAILS_ROOT, 'lib', '*.rb')].each do |f|
-  require f
-end
-}
-
 initializer 'time_formats.rb', 
 %q{# Example time formats
 { :short_date => "%x", :long_date => "%a, %b %d, %Y" }.each do |k, v|
-  ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.update(k => v)
+  Time::DATE_FORMATS.update(k => v)
 end
 }
 
 initializer 'validation_fix.rb',
-%q{
-  ActionView::Base.field_error_proc = Proc.new { |html_tag, instance|
-  "<span class=\"fieldWithErrors\">#{html_tag}</span>" } 
+%q{ActionView::Base.field_error_proc = Proc.new { |html_tag, instance|
+  "<span class=\"fieldWithErrors\">#{html_tag}</span>".html_safe }
 }
 
-# ====================
-# CONFIG
-# ====================
+initializer 'whereuat.rb',
+%q{require 'whereuat'
 
-capify!
-
-file 'Capfile', 
-%q{load 'deploy' if respond_to?(:namespace) # cap2 differentiator
-Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
-load 'config/deploy'
+  Whereuat.configure do |config|
+    config.pivotal_tracker_token   = "tracker_token"
+    config.pivotal_tracker_project = "pt_proj"
+  end
 }
 
-file 'config/database.yml', 
-%q{<% PASSWORD_FILE = File.join(RAILS_ROOT, '..', '..', 'shared', 'config', 'dbpassword') %>
-
-development:
-  adapter: mysql
-  database: <%= PROJECT_NAME %>_development
-  username: root
-  password: 
-  host: localhost
-  encoding: utf8
-  
-test:
-  adapter: mysql
-  database: <%= PROJECT_NAME %>_test
-  username: root
-  password: 
-  host: localhost
-  encoding: utf8
-}
-
-FileUtils.cp('config/database.yml', 'config/database.example.yml')
-
-file 'config/initializers/debugging.rb',
-%q{if %w(development test).include?(RAILS_ENV)
+initializer 'debugging.rb',
+%q{if %w(development test).include?(Rails.env)
   begin
     SCRIPT_LINES__
   rescue NameError
@@ -303,39 +238,22 @@ file 'config/initializers/debugging.rb',
 end
 }
 
-file 'config/initializers/spreadhead.rb',
-%q{
-  module Spreadhead
-    module PagesAuth
-      def self.filter(controller)
-        controller.send(:head, 403)
-      end
-    end  
-  end
-}
+# ====================
+# CONFIG
+# ====================
 
-file 'config/routes.rb',
-%q{
-  ActionController::Routing::Routes.draw do |map|
+capify!
 
-    map.resources :pages, :controller => 'spreadhead/pages'
-    map.connect '*url', :controller => 'spreadhead/pages', :action => 'show'
+FileUtils.cp('config/database.yml', 'config/database.example.yml')
 
-    map.connect ':controller/:action/:id'
-    map.connect ':controller/:action/:id.:format'
-  end
-}, :collision => :force
-
-inside('db') do
-  run "mkdir bootstrap"
-end
 
 # ====================
 # TEST
 # ====================
 
 inside('spec') do
-  FileUtils.touch("factories.rb")
+  run "mkdir support"
+  FileUtils.touch("support/factories.rb")
 end
 
 
@@ -347,28 +265,8 @@ file 'public/javascripts/xhr_fix.js',
 }
 
 # ====================
-# Cucumber
-# ====================
-generate(:cucumber)
-
-# ====================
 # CSS
 # ====================
-
-#Eric Meyer's Reset
-download("http://meyerweb.com/eric/tools/css/reset/reset.css", 
-  "public/stylesheets/reset.css")
-  
-#960.gs
-download("http://github.com/nathansmith/960-Grid-System/raw/master/code/css/960.css", 
-  "public/stylesheets/960.css")
-
-run "mkdir public/images/grid"
-download("http://github.com/nathansmith/960-Grid-System/raw/master/code/img/12_col.gif",
-  "public/images/grid/12_col.gif")
-
-download("http://github.com/nathansmith/960-Grid-System/raw/master/code/img/16_col.gif",
-  "public/images/grid/16_col.gif")
 
 from_repo("dpickett", "under_construction",  
   "stylesheets/under_construction.css",
@@ -378,34 +276,42 @@ from_repo("dpickett", "under_construction",
   "javascripts/jquery.under_construction.js",   
   "public/javascripts/jquery.under_construction.js")
   
-generate(:formtastic_stylesheets)
+# ==============
+# JS
+# ==============
+from_repo("rails", "jquery-ujs", "src/rails.js")  
 
-generate(:silky_buttons)
+generate('simple_form:install')
+
+run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --using 960 --syntax scss'
 
 # ====================
 # FINALIZE
 # ====================
 
 run "rm public/index.html"
-run "rm public/README"
-run "rm public/favicon.ico"
+run "rm README"
+
+file '.rvmrc', "rvm ree@#{ARGV[0]}"
+
+rake 'db:migrate'
 
 # Set up gitignore and commit base state
-file '.gitignore', <<-END
+file '.gitignore', %q{
+.bundle
 log/*.log
-tmp/*
-.DS\_Store
-.DS_Store
-db/test.sqlite3
-db/development.sqlite3
 /log/*.pid
+tmp/*
 /coverage/*
 public/system/*
 config/database.yml
+db/*.sqlite3
 *.swp
-END
+*.swo
+.DS_Store
+**/.DS_STORE
+}, :force => true
 
-run 'find . \( -type d -empty \) -and \( -not -regex ./\.git.* \) -exec touch {}/.gitignore \;'
 git :init
 git :add => "."
 git :commit => "-a -m 'Initial project commit'"
