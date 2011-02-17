@@ -164,7 +164,6 @@ file 'app/views/layouts/application.html.erb',
       'application' %>
 
     <%= yield :extra_footer %>
-    <%= whereuat unless Rails.env == 'production' %>
   </body>
 </html>
 }, :force => true
@@ -219,15 +218,6 @@ end
 initializer 'validation_fix.rb',
 %q{ActionView::Base.field_error_proc = Proc.new { |html_tag, instance|
   "<span class=\"fieldWithErrors\">#{html_tag}</span>".html_safe }
-}
-
-initializer 'whereuat.rb',
-%q{require 'whereuat'
-
-  Whereuat.configure do |config|
-    config.pivotal_tracker_token   = "tracker_token"
-    config.pivotal_tracker_project = "pt_proj"
-  end
 }
 
 initializer 'debugging.rb',
