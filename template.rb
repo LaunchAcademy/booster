@@ -24,8 +24,8 @@ def self.prepend_to_file(path, string)
 end
 
 def download(from, to = from.split("/").last)
-  #run "curl -s -L #{from} > #{to}"
-  file to, open(from).read
+  run "curl -s -L #{from} > #{to}"
+  # file to, open(from).read
 rescue
   puts "Can't get #{from} - Internet down?"
   exit!
@@ -41,16 +41,12 @@ end
 
 file 'Gemfile', <<-END, :force => true
 source 'http://rubygems.org/'
-source 'http://gems.github.com/'
 
-gem 'rails', '3.0.1'
-gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'rails', '3.0.4'
 
-gem 'RedCloth', '~> 4.2', :require => 'redcloth'
 gem 'bluecloth', '~> 2.0'
 gem 'will_paginate', '3.0.pre2'
-gem 'paperclip'
-gem 'friendly_id'
+gem 'slugged'
 gem 'inherited_resources'
 gem 'simple_form'
 gem 'erubis'
@@ -59,26 +55,27 @@ gem 'haml'
 gem 'compass'
 gem 'compass-960-plugin'
 gem 'devise'
-gem 'whereuat'
+gem 'configatron'
 
 group :development do
-  gem 'rspec-rails', '2.0.1'
+  gem 'rspec-rails'
   gem 'pickler'
   gem 'ruby-debug'
 end
 
 group :test do
-  gem 'rspec-rails', '2.0.1'
-  gem 'jferris-mocha'
+  gem 'rspec-rails'
+  gem 'mocha'
+  gem 'bourne'
   gem 'factory_girl'
-  gem "remarkable", ">=4.0.0.alpha4"
-  gem "remarkable_activemodel", ">=4.0.0.alpha4"
-  gem "remarkable_activerecord", ">=4.0.0.alpha4"
+  gem 'shoulda''
   gem "capybara"
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
   gem 'launchy'
+  gem 'postmaster_general', 
+    '~> 0.1'
 end
 END
 
