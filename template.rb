@@ -68,14 +68,13 @@ group :test do
   gem 'mocha'
   gem 'bourne'
   gem 'factory_girl'
-  gem 'shoulda''
+  gem 'shoulda'
   gem "capybara"
   gem 'database_cleaner'
   gem 'cucumber-rails'
   gem 'cucumber'
   gem 'launchy'
-  gem 'postmaster_general', 
-    '~> 0.1'
+  gem 'postmaster_general', '~> 0.1'
 end
 END
 
