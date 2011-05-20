@@ -42,7 +42,7 @@ end
 file 'Gemfile', <<-END, :force => true
 source 'http://rubygems.org/'
 
-gem 'rails', '3.0.4'
+gem 'rails', '3.0.7'
 
 gem 'bluecloth', '~> 2.0'
 gem 'will_paginate', '3.0.pre2'
