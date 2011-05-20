@@ -12,6 +12,7 @@ h1. Enlightened Template (Rails Template from Enlight Solutions)
 h2. Gems
 
 * Devise
+* kaminari
 * Inherited Resources
 * Simple Form
 * Paperclip
