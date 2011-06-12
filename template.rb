@@ -60,6 +60,13 @@ gem 'configatron'
 group :development do
   gem 'rspec-rails'
   gem 'ruby-debug'
+  
+  gem 'guard-compass' 
+  gem 'guard-livereload'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'rb-fsevent'
+  gem 'growl'
 end
 
 group :test do
@@ -280,6 +287,11 @@ from_repo("rails", "jquery-ujs", "src/rails.js", "public/javascripts/rails.js")
 generate('simple_form:install')
 
 run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --using 960 --syntax scss'
+
+# ===========
+# GUARD
+# ===========
+run 'bundle exec guard init compass livereload spork rspec'
 
 # ====================
 # FINALIZE
