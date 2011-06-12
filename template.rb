@@ -308,7 +308,7 @@ end
 run "rm public/index.html"
 run "rm README"
 
-file '.rvmrc', "rvm ree@#{ARGV[0]}"
+file '.rvmrc', "rvm 1.9.2@#{ARGV[0]}"
 
 rake 'db:migrate'
 
