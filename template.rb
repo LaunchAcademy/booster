@@ -59,7 +59,6 @@ gem 'configatron'
 
 group :development do
   gem 'rspec-rails'
-  gem 'pickler'
   gem 'ruby-debug'
 end
 
