@@ -291,7 +291,15 @@ run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/
 # ===========
 # GUARD
 # ===========
-run 'bundle exec guard init compass livereload spork rspec'
+[
+  "",
+  "compass",
+  "livereload",
+  "spork",
+  "rspec"
+].each do |guard_item|
+  run "bundle exec guard init #{guard_item}"
+end
 
 # ====================
 # FINALIZE
