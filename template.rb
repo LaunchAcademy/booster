@@ -71,8 +71,6 @@ group :test do
   gem 'shoulda'
   gem "capybara"
   gem 'database_cleaner'
-  gem 'cucumber-rails'
-  gem 'cucumber'
   gem 'launchy'
   gem 'postmaster_general', '~> 0.1'
 end
@@ -86,14 +84,6 @@ generate("rspec:install")
 
 generate(:hoptoad, '--api-key abcdefg123456')
 generate('devise:install')
-generate('cucumber:install', '--capybara --rspec')
-
-file 'features/support/factory_girl.rb',
-%q{require "factory_girl"
-
-require Rails.root.join("spec/support/factories")
-require "factory_girl/step_definitions"
-}
 
 #====================
 # PLUGINS
