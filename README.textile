@@ -13,6 +13,7 @@ h2. Gems
 
 * Devise
 * kaminari
+* bourbon
 * Inherited Resources
 * Simple Form
 * Paperclip

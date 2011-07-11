@@ -56,6 +56,7 @@ gem 'compass'
 gem 'compass-960-plugin'
 gem 'devise'
 gem 'configatron'
+gem 'bourbon'
 
 group :development do
   gem 'rspec-rails'
@@ -81,6 +82,8 @@ run 'bundle install'
 FileUtils.rm_rf("test")
 
 generate("rspec:install")
+
+rake 'bourbon:install'
 
 generate(:hoptoad, '--api-key abcdefg123456')
 generate('devise:install')
