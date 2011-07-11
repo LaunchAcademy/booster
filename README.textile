@@ -16,11 +16,8 @@ h2. Gems
 * bourbon
 * Inherited Resources
 * Simple Form
-* Paperclip
 * Hoptoad Notifier
-* metric_fu
-* inaction_mailer for dev
-* whereuat
+* slugged
 
 h2. Plugins
 
@@ -31,10 +28,9 @@ h2. Testing
 * Rspec
 * Remarkable
 * factory_girl
-* cucumber
 * capybara
-* jferris's mocha fork (spies)
-* metric_fu
+* bourne
+* postmaster_general
 
 h2. Initializers
 
