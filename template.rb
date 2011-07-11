@@ -293,6 +293,7 @@ log/*.log
 tmp/*
 /coverage/*
 public/system/*
+public/stylesheets/compiled/*
 config/database.yml
 db/*.sqlite3
 *.swp
