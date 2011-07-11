@@ -43,7 +43,7 @@ h2. Initializers
 h2. CSS
 
 * Eric Meyer's Reset
-* 960.gs
+* bourbon
 * conditional IE6/IE7 stylesheets
 
 h2. JavaScript

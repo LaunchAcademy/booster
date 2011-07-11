@@ -53,7 +53,6 @@ gem 'erubis'
 gem 'hoptoad_notifier'
 gem 'haml'
 gem 'compass'
-gem 'compass-960-plugin'
 gem 'devise'
 gem 'configatron'
 gem 'bourbon'
@@ -273,7 +272,7 @@ from_repo("rails", "jquery-ujs", "src/rails.js", "public/javascripts/rails.js")
 
 generate('simple_form:install')
 
-run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --using 960 --syntax scss'
+run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --syntax scss'
 
 # ====================
 # FINALIZE
