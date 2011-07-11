@@ -42,7 +42,7 @@ end
 file 'Gemfile', <<-END, :force => true
 source 'http://rubygems.org/'
 
-gem 'rails', '3.0.7'
+gem 'rails', '3.0.9'
 
 gem 'bluecloth', '~> 2.0'
 gem 'kaminari'
