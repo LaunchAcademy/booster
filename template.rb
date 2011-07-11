@@ -40,7 +40,7 @@ end
 #====================
 
 file 'Gemfile', <<-END, :force => true
-source 'http://rubygems.org/'
+source :rubygems
 
 gem 'rails', '3.0.9'
 
@@ -60,7 +60,7 @@ gem 'bourbon'
 group :development do
   gem 'rspec-rails'
   gem 'pickler'
-  gem 'ruby-debug'
+  gem 'ruby-debug19'
 end
 
 group :test do
@@ -72,7 +72,7 @@ group :test do
   gem "capybara"
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'postmaster_general', '~> 0.1'
+  gem 'postmaster_general', '~> 0.1.2'
 end
 END
 
@@ -281,7 +281,7 @@ run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/
 run "rm public/index.html"
 run "rm README"
 
-file '.rvmrc', "rvm ree@#{ARGV[0]}"
+file '.rvmrc', "rvm 1.9.2-p180-patched@#{ARGV[0]}"
 
 rake 'db:migrate'
 
