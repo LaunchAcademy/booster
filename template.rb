@@ -59,8 +59,14 @@ gem 'bourbon'
 
 group :development do
   gem 'rspec-rails'
-  gem 'pickler'
   gem 'ruby-debug19'
+  
+  gem 'guard-compass' 
+  gem 'guard-livereload'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'rb-fsevent'
+  gem 'growl'
 end
 
 group :test do
@@ -273,6 +279,19 @@ from_repo("rails", "jquery-ujs", "src/rails.js", "public/javascripts/rails.js")
 generate('simple_form:install')
 
 run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --syntax scss'
+
+# ===========
+# GUARD
+# ===========
+[
+  "",
+  "compass",
+  "livereload",
+  "spork",
+  "rspec"
+].each do |guard_item|
+  run "bundle exec guard init #{guard_item}"
+end
 
 # ====================
 # FINALIZE
