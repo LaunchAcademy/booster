@@ -90,7 +90,7 @@ group :test do
   gem 'launchy'
   gem 'postmaster_general', '~> 0.1'
   # Pretty printed test output
-  gem 'turn', :require => false
+  gem 'fuubar'
 end
 END
 
@@ -99,6 +99,12 @@ run 'bundle install'
 FileUtils.rm_rf("test")
 
 generate("rspec:install")
+file '.rspec',
+%q{
+  --colour
+  --format Fuubar
+}
+
 
 generate(:hoptoad, '--api-key abcdefg123456')
 generate('devise:install')
