@@ -42,13 +42,14 @@ end
 file 'Gemfile', <<-END, :force => true
 source 'http://rubygems.org/'
 
-gem 'rails', '3.1.0.rc5'
+gem 'rails', '3.1.3'
 
 gem 'sqlite3'
+gem 'pg'
 
 group :assets do
-  gem 'sass-rails', "~> 3.1.0.rc"
-  gem 'coffee-rails', "~> 3.1.0.rc"
+  gem 'sass-rails', "~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
   gem 'bourbon'
 end
@@ -126,6 +127,45 @@ plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
 #====================
 # APP
 #====================
+
+file 'config/database_pg.example.yml', 
+%q{ # PostgreSQL. Versions 7.4 and 8.x are supported.
+#
+# Install the ruby-postgres driver:
+#   gem install ruby-postgres
+# On Mac OS X:
+#   gem install ruby-postgres -- --include=/usr/local/pgsql
+# On Windows:
+#   gem install ruby-postgres
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: _development
+  pool: 5
+  username: 
+  password: 
+
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: _test
+  pool: 5
+  username: 
+  password: 
+
+cucumber:
+  adapter: postgresql
+  encoding: unicode
+  database: _test
+  pool: 5
+  username: 
+  password: 
+
+}
 
 file 'app/helpers/application_helper.rb', 
 %q{module ApplicationHelper
