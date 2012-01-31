@@ -107,7 +107,7 @@ file '.rspec',
 }
 
 
-generate(:hoptoad, '--api-key abcdefg123456')
+generate(:airbrake, '--api-key abcdefg123456')
 generate('devise:install')
 generate('cucumber:install', '--capybara --rspec')
 
