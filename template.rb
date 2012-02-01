@@ -69,7 +69,6 @@ gem 'configatron'
 
 group :development do
   gem 'rspec-rails'
-  gem 'ruby-debug19'
   
   gem 'guard-livereload'
   gem 'guard-rspec'
