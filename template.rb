@@ -48,8 +48,8 @@ gem 'sqlite3'
 gem 'pg'
 
 group :assets do
-  gem 'sass-rails', "~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier'
   gem 'bourbon'
 end
@@ -67,6 +67,7 @@ gem 'haml'
 gem 'devise'
 gem 'configatron'
 gem 'bourbon'
+gem 'tab_menu'
 
 group :development do
   gem 'rspec-rails'
@@ -107,12 +108,6 @@ file '.rspec',
 
 generate(:airbrake, '--api-key abcdefg123456')
 generate('devise:install')
-
-#====================
-# PLUGINS
-#====================
-
-plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
 
 #====================
 # APP
