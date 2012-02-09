@@ -42,26 +42,35 @@ end
 file 'Gemfile', <<-END, :force => true
 source :rubygems
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.2.1'
+
+gem 'sqlite3'
+gem 'pg'
+
+group :assets do
+  gem 'sass-rails', "~> 3.1.0"
+  gem 'coffee-rails', "~> 3.1.0"
+  gem 'uglifier'
+  gem 'bourbon'
+end
+
+gem 'jquery-rails'
 
 gem 'bluecloth', '~> 2.0'
 gem 'kaminari'
-gem 'slugged'
+# gem 'slugged'
 gem 'inherited_resources'
 gem 'simple_form'
 gem 'erubis'
-gem 'hoptoad_notifier'
+gem 'airbrake'
 gem 'haml'
-gem 'compass'
 gem 'devise'
 gem 'configatron'
 gem 'bourbon'
 
 group :development do
   gem 'rspec-rails'
-  gem 'ruby-debug19'
   
-  gem 'guard-compass' 
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-spork'
@@ -78,7 +87,9 @@ group :test do
   gem "capybara"
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'postmaster_general', '~> 0.1.2'
+  gem 'postmaster_general', '~> 0.1'
+  # Pretty printed test output
+  gem 'fuubar'
 end
 END
 
@@ -87,10 +98,14 @@ run 'bundle install'
 FileUtils.rm_rf("test")
 
 generate("rspec:install")
+file '.rspec',
+%q{
+  --colour
+  --format Fuubar
+}
 
-rake 'bourbon:install'
 
-generate(:hoptoad, '--api-key abcdefg123456')
+generate(:airbrake, '--api-key abcdefg123456')
 generate('devise:install')
 
 #====================
@@ -102,6 +117,45 @@ plugin 'tab_menu', :git => "git://github.com/dpickett/tab_menu.git"
 #====================
 # APP
 #====================
+
+file 'config/database_pg.example.yml', 
+%q{ # PostgreSQL. Versions 7.4 and 8.x are supported.
+#
+# Install the ruby-postgres driver:
+#   gem install ruby-postgres
+# On Mac OS X:
+#   gem install ruby-postgres -- --include=/usr/local/pgsql
+# On Windows:
+#   gem install ruby-postgres
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: _development
+  pool: 5
+  username: 
+  password: 
+
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: _test
+  pool: 5
+  username: 
+  password: 
+
+cucumber:
+  adapter: postgresql
+  encoding: unicode
+  database: _test
+  pool: 5
+  username: 
+  password: 
+
+}
 
 file 'app/helpers/application_helper.rb', 
 %q{module ApplicationHelper
@@ -119,14 +173,7 @@ file 'app/views/layouts/_flashes.html.erb',
 </div>
 }
 
-run 'rm public/javascripts/prototype.js'
-run 'rm public/javascripts/effects.js'
-run 'rm public/javascripts/dragdrop.js'
-run 'rm public/javascripts/controls.js'
-run 'rm public/javascripts/rails.js'
-
-file 'public/stylesheets/ie7.css', ""
-file 'public/stylesheets/ie6.css', ""
+file 'app/assets/stylesheets/ie7.css.scss', ""
 
 file 'app/views/layouts/application.html.erb', 
 %q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -141,10 +188,9 @@ file 'app/views/layouts/application.html.erb',
     <meta name="keywords" content="<%= yield(:keywords) || "PROJECT KEYWORDS" %>" />
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "compiled/grid", "compiled/text", "under_construction",
-                            "formtastic", "formtastic_changes", "compiled/application" %>
+    <%= stylesheet_link_tag "under_construction",
+                            "application" %>
     <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
-    <!--[if lte IE 6]><%= stylesheet_link_tag "ie6" %><![endif]-->
 
     <%= yield :extra_header %>
   </head>
@@ -158,8 +204,11 @@ file 'app/views/layouts/application.html.erb',
       type="text/javascript"></script>
 
     <%= javascript_include_tag 'xhr_fix', 
-      'jquery.under_construction.js',
-      'application' %>
+      'jquery.under_construction',
+      'application',
+      'underscore',
+      'backbone',
+      'handlebars' %>
 
     <%= yield :extra_footer %>
   </body>
@@ -252,12 +301,112 @@ inside('spec') do
 end
 
 
-file 'public/javascripts/xhr_fix.js',
+file 'app/assets/javascripts/xhr_fix.js',
 %q{jQuery.ajaxSetup({ 
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept",
     "text/javascript")} 
 });
 }
+
+file 'spec/spec_helper.rb', 
+%q{
+  require 'rubygems'
+require 'spork'
+require 'postmaster_general'
+
+ENV["RAILS_ENV"] ||= 'test'
+Spork.prefork do
+  require File.expand_path("../../config/environment", __FILE__)
+  require 'rspec/rails'
+  require 'shoulda'
+  PostmasterGeneral.log_directory = Rails.root.join("tmp/rendered_emails")
+end
+
+Spork.each_run do
+  Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+end
+
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+
+Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+RSpec.configure do |config|
+  # == Mock Framework
+  #
+  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
+  #
+  # config.mock_with :mocha
+  # config.mock_with :flexmock
+  # config.mock_with :rr
+  config.mock_with :mocha
+
+  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  # If you're not using ActiveRecord, or you'd prefer not to run each of your
+  # examples within a transaction, remove the following line or assign false
+  # instead of true.
+  config.use_transactional_fixtures = true
+end
+}, :force => true
+
+file 'features/support/env.rb', 
+%q{
+# IMPORTANT: This file is generated by cucumber-rails - edit at your own peril.
+# It is recommended to regenerate this file in the future when you upgrade to a 
+# newer version of cucumber-rails. Consider adding your own code to a new file 
+# instead of editing this one. Cucumber will automatically load all features/**/*.rb
+# files.
+require "rubygems"
+require "spork"
+
+Spork.prefork do
+  require 'cucumber/rails'
+
+  # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
+  # order to ease the transition to Capybara we set the default here. If you'd
+  # prefer to use XPath just remove this line and adjust any selectors in your
+  # steps to use the XPath syntax.
+  Capybara.default_selector = :css
+
+  # By default, any exception happening in your Rails application will bubble up
+  # to Cucumber so that your scenario will fail. This is a different from how 
+  # your application behaves in the production environment, where an error page will 
+  # be rendered instead.
+  #
+  # Sometimes we want to override this default behaviour and allow Rails to rescue
+  # exceptions and display an error page (just like when the app is running in production).
+  # Typical scenarios where you want to do this is when you test your error pages.
+  # There are two ways to allow Rails to rescue exceptions:
+  #
+  # 1) Tag your scenario (or feature) with @allow-rescue
+  #
+  # 2) Set the value below to true. Beware that doing this globally is not
+  # recommended as it will mask a lot of errors for you!
+  #
+  ActionController::Base.allow_rescue = false
+
+  # Remove/comment out the lines below if your app doesn't have a database.
+  # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
+  begin
+    DatabaseCleaner.strategy = :truncation
+  rescue NameError
+    raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+  end
+
+  # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
+  # See the DatabaseCleaner documentation for details. Example:
+  #
+  #   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
+  #     DatabaseCleaner.strategy = :truncation, {:except => %w[widgets]}
+  #   end
+  #
+  #   Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
+  #     DatabaseCleaner.strategy = :transaction
+  #   end
+end
+}, :force => true
 
 # ====================
 # CSS
@@ -265,27 +414,98 @@ file 'public/javascripts/xhr_fix.js',
 
 from_repo("dpickett", "under_construction",  
   "stylesheets/under_construction.css",
-  "public/stylesheets/under_construction.css")
+  "app/assets/stylesheets/under_construction.css")
 
 from_repo("dpickett", "under_construction", 
   "javascripts/jquery.under_construction.js",   
-  "public/javascripts/jquery.under_construction.js")
+  "app/assets/javascripts/jquery.under_construction.js")
+  
+file 'app/assets/javascripts/xhr_fix.js',
+%q{jQuery.ajaxSetup({ 
+  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept",
+    "text/javascript")} 
+});
+}
+
+file 'app/assets/stylesheets/simple_form.css.sass', 
+%q{
+/* ----- SimpleForm Styles ----- */
+
+.simple_form
+  div.input
+    margin-bottom: 10px
+
+  label
+    float: left
+    width: 100px
+    text-align: right
+    margin: 2px 10px
+
+  .error
+    clear:   left
+    color:   black
+    display: block
+    margin-left: 120px
+    font-size:    12px
+
+  .hint
+    clear: left
+    margin-left: 120px
+    font-size:    12px
+    color: #555
+    display: block
+    font-style: italic
+
+div.boolean, .simple_form input[type='submit']
+  margin-left: 120px
+
+div.boolean label, label.collection_radio
+  float: none
+  margin: 0
+
+label.collection_radio
+  margin-right: 10px
+  vertical-align: -2px
+  margin-left:   2px
+
+.field_with_errors
+  background-color: #ff3333
+
+input.radio
+  margin-right: 5px
+  vertical-align: -3px
+
+input.check_boxes
+  margin-left: 3px
+  vertical-align: -3px
+
+label.collection_check_boxes
+  float: none
+  margin: 0
+  vertical-align: -2px
+  margin-left:   2px
+}, :force => true
   
 # ==============
 # JS
 # ==============
-from_repo("rails", "jquery-ujs", "src/rails.js", "public/javascripts/rails.js")  
 
 generate('simple_form:install')
 
-run 'bundle exec compass init rails . -r ninesixty --css-dir=public/stylesheets/compiled --sass-dir=app/stylesheets --syntax scss'
+# ===========
+# BACKBONE
+# ===========
+
+download("http://documentcloud.github.com/backbone/backbone.js", "app/assets/javascripts/backbone.js")
+download("http://documentcloud.github.com/underscore/underscore.js", "app/assets/javascripts/underscore.js")
+download("https://raw.github.com/douglascrockford/JSON-js/master/json2.js", "app/assets/javascripts/json2.js")
+download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.beta.3.js", "app/assets/javascripts/handlebars.js")
 
 # ===========
 # GUARD
 # ===========
 [
   "",
-  "compass",
   "livereload",
   "spork",
   "rspec"
