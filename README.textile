@@ -16,8 +16,7 @@ h2. Gems
 * bourbon
 * Inherited Resources
 * Simple Form
-* Hoptoad Notifier
-* slugged
+* Airbrake
 
 h2. Plugins
 
@@ -26,16 +25,17 @@ h2. Plugins
 h2. Testing
 
 * Rspec
-* Remarkable
 * factory_girl
 * capybara
-* bourne
+* mocha
+* shoulda
+* valid_attribute
 * postmaster_general
 
 h2. Initializers
 
 * action_mailer setup
-* hoptoad setup
+* airbrake setup
 * validation_fix - make fieldWithErrors element a &lt;span&gt;
 * hoptoad - setup hoptoad
 * debugging stuff
@@ -51,7 +51,7 @@ h2. JavaScript
 * JQuery (google hosted)
 * JQuery UI (google hosted)
 * JQuery Rails.js
-* under_construction
+* Backbone
 
 h3. TODO
 
