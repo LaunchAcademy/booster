@@ -35,6 +35,10 @@ def from_repo(github_user, project_name, from, to = from.split("/").last)
   download("http://github.com/#{github_user}/#{project_name}/raw/master/#{from}", to)
 end
 
+def rvm(cmd)
+  run "bash -l -c \"rvm #{cmd}\""
+end
+
 #====================
 # GEMS
 #====================
@@ -72,11 +76,16 @@ gem 'tab_menu'
 group :development do
   gem 'rspec-rails'
   
+  gem 'guard'
   gem 'guard-livereload'
   gem 'guard-rspec'
-  gem 'guard-spork'
+  gem 'guard-bundler'
+  gem 'guard-spin'
+  
   gem 'rb-fsevent'
   gem 'growl'
+  
+  gem 'heroku'
 end
 
 group :test do
@@ -91,10 +100,16 @@ group :test do
   gem 'postmaster_general', '~> 0.1'
   # Pretty printed test output
   gem 'fuubar'
+  
+  gem 'pry', :group => [:development, :test]
 end
 END
 
-run 'bundle install'
+rvm "use 1.9.3@#{app_name} --create"
+rvm "1.9.3@#{app_name} do gem install bundler"
+rvm "1.9.3@#{app_name} do bundle install"
+
+file '.rvmrc', "rvm 1.9.3@#{ARGV[0]}"
 
 FileUtils.rm_rf("test")
 
@@ -103,7 +118,7 @@ file '.rspec',
 %q{
   --colour
   --format Fuubar
-}
+}, force: true
 
 
 generate(:airbrake, '--api-key abcdefg123456')
@@ -261,17 +276,12 @@ initializer 'validation_fix.rb',
   "<span class=\"fieldWithErrors\">#{html_tag}</span>".html_safe }
 }
 
-initializer 'debugging.rb',
-%q{if %w(development test).include?(Rails.env)
+initializer 'pry.rb',
+%q{silence_warnings do
   begin
-    SCRIPT_LINES__
-  rescue NameError
-    SCRIPT_LINES__ = {}
-  end
-  begin
-    require 'ruby-debug'
+    require 'pry'
+    IRB = Pry
   rescue LoadError
-    warn "Debugging will be unavailable: #{$!}"
   end
 end
 }
@@ -282,7 +292,7 @@ end
 
 capify!
 
-FileUtils.cp('config/database.yml', 'config/database.example.yml')
+FileUtils.cp('config/database.yml', 'config/database_pg.example.yml')
 
 
 # ====================
@@ -305,44 +315,47 @@ file 'app/assets/javascripts/xhr_fix.js',
 file 'spec/spec_helper.rb', 
 %q{
   require 'rubygems'
-require 'spork'
-require 'postmaster_general'
+  require 'postmaster_general'
 
-ENV["RAILS_ENV"] ||= 'test'
-Spork.prefork do
+  ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
+
+  require 'pry'
+
   require 'rspec/rails'
+  require 'factory_girl'
+  require 'database_cleaner'
   require 'shoulda'
+  require 'capybara/rspec'
   PostmasterGeneral.log_directory = Rails.root.join("tmp/rendered_emails")
-end
 
-Spork.each_run do
+  # Requires supporting ruby files with custom matchers and macros, etc,
+  # in spec/support/ and its subdirectories.
+
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
-end
 
-# Requires supporting ruby files with custom matchers and macros, etc,
-# in spec/support/ and its subdirectories.
+  RSpec.configure do |config|
+    # == Mock Framework
+    #
+    # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
+    #
+    # config.mock_with :mocha
+    # config.mock_with :flexmock
+    # config.mock_with :rr
+    config.mock_with :mocha
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+    # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+    config.fixture_path = "spec/fixtures"
 
-RSpec.configure do |config|
-  # == Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
-  config.mock_with :mocha
+    # If you're not using ActiveRecord, or you'd prefer not to run each of your
+    # examples within a transaction, remove the following line or assign false
+    # instead of true.
+    config.use_transactional_fixtures = true
 
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
-  config.use_transactional_fixtures = true
-end
+    config.treat_symbols_as_metadata_keys_with_true_values = true
+    config.filter_run focus: true
+    config.run_all_when_everything_filtered = true
+  end
 }, :force => true
 
 # ====================
@@ -444,8 +457,10 @@ download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.bet
 [
   "",
   "livereload",
-  "spork",
-  "rspec"
+  "rspec",
+  "bundler",
+  "spin",
+  ""
 ].each do |guard_item|
   run "bundle exec guard init #{guard_item}"
 end
@@ -456,8 +471,6 @@ end
 
 run "rm public/index.html"
 run "rm README"
-
-file '.rvmrc', "rvm 1.9.2-p180-patched@#{ARGV[0]}"
 
 rake 'db:migrate'
 
