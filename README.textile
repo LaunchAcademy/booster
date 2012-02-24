@@ -13,14 +13,14 @@ h2. Gems
 
 * Devise
 * kaminari
-* bourbon
 * Inherited Resources
 * Simple Form
 * Airbrake
-
-h2. Plugins
-
-* tab_menu
+* Configatron
+* Tab Menu
+* Heroku
+* Guard (livereload, rspec, bundler, spin)
+* Pry
 
 h2. Testing
 
@@ -29,7 +29,6 @@ h2. Testing
 * capybara
 * mocha
 * shoulda
-* valid_attribute
 * postmaster_general
 
 h2. Initializers
@@ -39,6 +38,7 @@ h2. Initializers
 * validation_fix - make fieldWithErrors element a &lt;span&gt;
 * hoptoad - setup hoptoad
 * debugging stuff
+* pry
 
 h2. CSS
 
@@ -52,9 +52,3 @@ h2. JavaScript
 * JQuery UI (google hosted)
 * JQuery Rails.js
 * Backbone
-
-h3. TODO
-
-* Break out files
-* jammit
-* lemonade?
