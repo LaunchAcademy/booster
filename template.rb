@@ -39,6 +39,10 @@ def rvm(cmd)
   run "bash -l -c \"rvm #{cmd}\""
 end
 
+def bash_run(cmd)
+  run "bash -l -c \"#{cmd}\""
+end
+
 #====================
 # GEMS
 #====================
@@ -72,6 +76,7 @@ gem 'devise'
 gem 'configatron'
 gem 'bourbon'
 gem 'tab_menu'
+gem "twitter-bootstrap-rails", "~> 2.0.1.0"
 
 group :development do
   gem 'rspec-rails'
@@ -123,6 +128,10 @@ file '.rspec',
 
 generate(:airbrake, '--api-key abcdefg123456')
 generate('devise:install')
+generate('bootstrap:install')
+
+run "rm app/assets/javascripts/bootstrap.js.coffee"
+run "rm app/assets/stylesheets/bootstrap.css.less"
 
 file 'features/support/factory_girl.rb',
 %q{require "factory_girl"
@@ -182,7 +191,42 @@ file 'app/views/layouts/_flashes.html.erb',
 </div>
 }
 
+file 'app/assets/javascripts/application.js', 
+%q{
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.
+//
+// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
+// GO AFTER THE REQUIRES BELOW.
+//
+//= require jquery
+//= require jquery_ujs
+//= require xhr_fix
+//= require underscore
+//= require backbone
+//= require handlebars
+//= require bootstrap
+//= require_tree .
+
+}, force: true
+
+file 'app/assets/javascripts/application.css', 
+%q{
+*= require_self
+*= require twitter/bootstrap
+*= require under_construction
+*= require main
+
+}, force: true
+
 file 'app/assets/stylesheets/ie7.css.scss', ""
+file 'app/assets/stylesheets/main.css.scss', ""
 
 file 'app/views/layouts/application.html.erb', 
 %q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -197,8 +241,7 @@ file 'app/views/layouts/application.html.erb',
     <meta name="keywords" content="<%= yield(:keywords) || "PROJECT KEYWORDS" %>" />
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "under_construction",
-                            "application" %>
+    <%= stylesheet_link_tag "application" %>
     <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
 
     <%= yield :extra_header %>
@@ -207,17 +250,7 @@ file 'app/views/layouts/application.html.erb',
     <%= render :partial => 'layouts/flashes' -%>
     <%= yield %>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
-      type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"
-      type="text/javascript"></script>
-
-    <%= javascript_include_tag 'xhr_fix', 
-      'jquery.under_construction',
-      'application',
-      'underscore',
-      'backbone',
-      'handlebars' %>
+    <%= javascript_include_tag 'application' %>
 
     <%= yield :extra_footer %>
   </body>
@@ -376,71 +409,12 @@ file 'app/assets/javascripts/xhr_fix.js',
     "text/javascript")} 
 });
 }
-
-file 'app/assets/stylesheets/simple_form.css.sass', 
-%q{
-/* ----- SimpleForm Styles ----- */
-
-.simple_form
-  div.input
-    margin-bottom: 10px
-
-  label
-    float: left
-    width: 100px
-    text-align: right
-    margin: 2px 10px
-
-  .error
-    clear:   left
-    color:   black
-    display: block
-    margin-left: 120px
-    font-size:    12px
-
-  .hint
-    clear: left
-    margin-left: 120px
-    font-size:    12px
-    color: #555
-    display: block
-    font-style: italic
-
-div.boolean, .simple_form input[type='submit']
-  margin-left: 120px
-
-div.boolean label, label.collection_radio
-  float: none
-  margin: 0
-
-label.collection_radio
-  margin-right: 10px
-  vertical-align: -2px
-  margin-left:   2px
-
-.field_with_errors
-  background-color: #ff3333
-
-input.radio
-  margin-right: 5px
-  vertical-align: -3px
-
-input.check_boxes
-  margin-left: 3px
-  vertical-align: -3px
-
-label.collection_check_boxes
-  float: none
-  margin: 0
-  vertical-align: -2px
-  margin-left:   2px
-}, :force => true
   
 # ==============
 # JS
 # ==============
 
-generate('simple_form:install')
+generate('simple_form:install --bootstrap')
 
 # ===========
 # BACKBONE
@@ -456,13 +430,13 @@ download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.bet
 # ===========
 [
   "",
+  "spin",
   "livereload",
   "rspec",
   "bundler",
-  "spin",
   ""
 ].each do |guard_item|
-  run "bundle exec guard init #{guard_item}"
+  bash_run "bundle exec guard init #{guard_item}"
 end
 
 # ====================
@@ -485,6 +459,7 @@ public/system/*
 public/stylesheets/compiled/*
 config/database.yml
 db/*.sqlite3
+db/structure.sql
 *.swp
 *.swo
 .DS_Store
