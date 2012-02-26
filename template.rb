@@ -43,6 +43,11 @@ def bash_run(cmd)
   run "bash -l -c \"#{cmd}\""
 end
 
+def generate(*args)
+  string = args.join(' ')
+  bash_run "rails generate #{string}"
+end
+
 #====================
 # GEMS
 #====================
@@ -319,6 +324,13 @@ initializer 'pry.rb',
 end
 }
 
+initializer 'tab_menu.rb',
+%q{TabMenu.configure do |config|
+  config.active_class = "active"
+end
+
+}
+
 # ====================
 # CONFIG
 # ====================
@@ -446,7 +458,7 @@ end
 run "rm public/index.html"
 run "rm README"
 
-rake 'db:migrate'
+bash_run 'rake db:migrate'
 
 # Set up gitignore and commit base state
 file '.gitignore', %q{
