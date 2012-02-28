@@ -110,9 +110,10 @@ group :test do
   gem 'postmaster_general', '~> 0.1'
   # Pretty printed test output
   gem 'fuubar'
-  
-  gem 'pry', :group => [:development, :test]
 end
+
+gem 'pry', :group => [:development, :test]
+
 END
 
 rvm "use 1.9.3@#{app_name} --create"
@@ -212,16 +213,16 @@ file 'app/assets/javascripts/application.js',
 //
 //= require jquery
 //= require jquery_ujs
+//= require twitter/bootstrap
 //= require xhr_fix
 //= require underscore
 //= require backbone
 //= require handlebars
-//= require bootstrap
 //= require_tree .
 
 }, force: true
 
-file 'app/assets/javascripts/application.css', 
+file 'app/assets/stylesheets/application.css', 
 %q{
 *= require_self
 *= require twitter/bootstrap
@@ -337,7 +338,7 @@ end
 
 capify!
 
-FileUtils.cp('config/database.yml', 'config/database_pg.example.yml')
+FileUtils.cp('config/database_pg.example.yml', 'config/database.yml')
 
 
 # ====================
