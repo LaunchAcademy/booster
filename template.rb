@@ -35,19 +35,6 @@ def from_repo(github_user, project_name, from, to = from.split("/").last)
   download("http://github.com/#{github_user}/#{project_name}/raw/master/#{from}", to)
 end
 
-def rvm(cmd)
-  run "bash -l -c \"rvm #{cmd}\""
-end
-
-def bash_run(cmd)
-  run "bash -l -c \"#{cmd}\""
-end
-
-def generate(*args)
-  string = args.join(' ')
-  bash_run "rails generate #{string}"
-end
-
 #====================
 # GEMS
 #====================
@@ -116,11 +103,9 @@ gem 'pry', :group => [:development, :test]
 
 END
 
-rvm "use 1.9.3@#{app_name} --create"
-rvm "1.9.3@#{app_name} do gem install bundler"
-rvm "1.9.3@#{app_name} do bundle install"
+run 'bundle install'
 
-file '.rvmrc', "rvm 1.9.3@#{ARGV[0]}"
+file '.rvmrc', "rvm 1.9.3@#{app_name}"
 
 FileUtils.rm_rf("test")
 
@@ -338,8 +323,6 @@ end
 
 capify!
 
-FileUtils.cp('config/database_pg.example.yml', 'config/database.yml')
-
 
 # ====================
 # TEST
@@ -449,7 +432,7 @@ download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.bet
   "bundler",
   ""
 ].each do |guard_item|
-  bash_run "bundle exec guard init #{guard_item}"
+  run "bundle exec guard init #{guard_item}"
 end
 
 # ====================
@@ -459,7 +442,7 @@ end
 run "rm public/index.html"
 run "rm README"
 
-bash_run 'rake db:migrate'
+run 'rake db:migrate'
 
 # Set up gitignore and commit base state
 file '.gitignore', %q{
