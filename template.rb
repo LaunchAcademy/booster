@@ -440,7 +440,6 @@ download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.bet
   "",
   "spin",
   "livereload",
-  "rspec",
   "bundler",
   ""
 ].each do |guard_item|
