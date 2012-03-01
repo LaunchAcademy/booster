@@ -35,10 +35,6 @@ def from_repo(github_user, project_name, from, to = from.split("/").last)
   download("http://github.com/#{github_user}/#{project_name}/raw/master/#{from}", to)
 end
 
-def rvm(cmd)
-  run "bash -l -c \"rvm #{cmd}\""
-end
-
 #====================
 # GEMS
 #====================
@@ -72,6 +68,7 @@ gem 'devise'
 gem 'configatron'
 gem 'bourbon'
 gem 'tab_menu'
+gem "twitter-bootstrap-rails", "~> 2.0.1.0"
 
 group :development do
   gem 'rspec-rails'
@@ -100,16 +97,15 @@ group :test do
   gem 'postmaster_general', '~> 0.1'
   # Pretty printed test output
   gem 'fuubar'
-  
-  gem 'pry', :group => [:development, :test]
 end
+
+gem 'pry', :group => [:development, :test]
+
 END
 
-rvm "use 1.9.3@#{app_name} --create"
-rvm "1.9.3@#{app_name} do gem install bundler"
-rvm "1.9.3@#{app_name} do bundle install"
+run 'bundle install'
 
-file '.rvmrc', "rvm 1.9.3@#{ARGV[0]}"
+file '.rvmrc', "rvm 1.9.3@#{app_name}"
 
 FileUtils.rm_rf("test")
 
@@ -123,6 +119,10 @@ file '.rspec',
 
 generate(:airbrake, '--api-key abcdefg123456')
 generate('devise:install')
+generate('bootstrap:install')
+
+run "rm app/assets/javascripts/bootstrap.js.coffee"
+run "rm app/assets/stylesheets/bootstrap.css.less"
 
 file 'features/support/factory_girl.rb',
 %q{require "factory_girl"
@@ -182,7 +182,54 @@ file 'app/views/layouts/_flashes.html.erb',
 </div>
 }
 
+file 'app/assets/javascripts/application.js', 
+%q{
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.
+//
+// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
+// GO AFTER THE REQUIRES BELOW.
+//
+//= require jquery
+//= require jquery_ujs
+//= require twitter/bootstrap
+//= require xhr_fix
+//= require underscore
+//= require backbone
+//= require handlebars
+//= require_tree .
+
+}, force: true
+
+file 'app/assets/stylesheets/application.css', 
+%q{
+  /*
+   * This is a manifest file that'll be compiled into application.css, which will include all the files
+   * listed below.
+   *
+   * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+   * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+   *
+   * You're free to add application-wide styles to this file and they'll appear at the top of the
+   * compiled file, but it's generally better to create a new file per style scope.
+   *
+   *= require_self
+   *= require twitter/bootstrap
+   *= require under_construction
+   *= require main
+  */
+
+
+}, force: true
+
 file 'app/assets/stylesheets/ie7.css.scss', ""
+file 'app/assets/stylesheets/main.css.scss', ""
 
 file 'app/views/layouts/application.html.erb', 
 %q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
@@ -197,8 +244,7 @@ file 'app/views/layouts/application.html.erb',
     <meta name="keywords" content="<%= yield(:keywords) || "PROJECT KEYWORDS" %>" />
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "under_construction",
-                            "application" %>
+    <%= stylesheet_link_tag "application" %>
     <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
 
     <%= yield :extra_header %>
@@ -207,17 +253,7 @@ file 'app/views/layouts/application.html.erb',
     <%= render :partial => 'layouts/flashes' -%>
     <%= yield %>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"
-      type="text/javascript"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"
-      type="text/javascript"></script>
-
-    <%= javascript_include_tag 'xhr_fix', 
-      'jquery.under_construction',
-      'application',
-      'underscore',
-      'backbone',
-      'handlebars' %>
+    <%= javascript_include_tag 'application' %>
 
     <%= yield :extra_footer %>
   </body>
@@ -286,13 +322,18 @@ initializer 'pry.rb',
 end
 }
 
+initializer 'tab_menu.rb',
+%q{TabMenu.configure do |config|
+  config.active_class = "active"
+end
+
+}
+
 # ====================
 # CONFIG
 # ====================
 
 capify!
-
-FileUtils.cp('config/database.yml', 'config/database_pg.example.yml')
 
 
 # ====================
@@ -376,71 +417,12 @@ file 'app/assets/javascripts/xhr_fix.js',
     "text/javascript")} 
 });
 }
-
-file 'app/assets/stylesheets/simple_form.css.sass', 
-%q{
-/* ----- SimpleForm Styles ----- */
-
-.simple_form
-  div.input
-    margin-bottom: 10px
-
-  label
-    float: left
-    width: 100px
-    text-align: right
-    margin: 2px 10px
-
-  .error
-    clear:   left
-    color:   black
-    display: block
-    margin-left: 120px
-    font-size:    12px
-
-  .hint
-    clear: left
-    margin-left: 120px
-    font-size:    12px
-    color: #555
-    display: block
-    font-style: italic
-
-div.boolean, .simple_form input[type='submit']
-  margin-left: 120px
-
-div.boolean label, label.collection_radio
-  float: none
-  margin: 0
-
-label.collection_radio
-  margin-right: 10px
-  vertical-align: -2px
-  margin-left:   2px
-
-.field_with_errors
-  background-color: #ff3333
-
-input.radio
-  margin-right: 5px
-  vertical-align: -3px
-
-input.check_boxes
-  margin-left: 3px
-  vertical-align: -3px
-
-label.collection_check_boxes
-  float: none
-  margin: 0
-  vertical-align: -2px
-  margin-left:   2px
-}, :force => true
   
 # ==============
 # JS
 # ==============
 
-generate('simple_form:install')
+generate('simple_form:install --bootstrap')
 
 # ===========
 # BACKBONE
@@ -456,10 +438,9 @@ download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.bet
 # ===========
 [
   "",
-  "livereload",
-  "rspec",
-  "bundler",
   "spin",
+  "livereload",
+  "bundler",
   ""
 ].each do |guard_item|
   run "bundle exec guard init #{guard_item}"
@@ -472,7 +453,7 @@ end
 run "rm public/index.html"
 run "rm README"
 
-rake 'db:migrate'
+run 'rake db:migrate'
 
 # Set up gitignore and commit base state
 file '.gitignore', %q{
@@ -485,6 +466,7 @@ public/system/*
 public/stylesheets/compiled/*
 config/database.yml
 db/*.sqlite3
+db/structure.sql
 *.swp
 *.swo
 .DS_Store
