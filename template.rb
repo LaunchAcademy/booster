@@ -78,6 +78,7 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spin'
+  gem 'guard-jasmine'
 
   gem 'rb-fsevent'
   gem 'growl'
@@ -99,7 +100,11 @@ group :test do
   gem 'fuubar'
 end
 
-gem 'pry', :group => [:development, :test]
+group :development, :test do
+  gem 'jasmine'
+  gem 'jasminerice'
+  gem 'pry'
+end
 
 END
 
@@ -137,21 +142,12 @@ require "factory_girl/step_definitions"
 #====================
 
 file 'config/database_pg.example.yml',
-%q{ # PostgreSQL. Versions 7.4 and 8.x are supported.
-#
-# Install the ruby-postgres driver:
-#   gem install ruby-postgres
-# On Mac OS X:
-#   gem install ruby-postgres -- --include=/usr/local/pgsql
-# On Windows:
-#   gem install ruby-postgres
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
+%Q{ # PostgreSQL. Versions 7.4 and 8.x are supported.
 
 development:
   adapter: postgresql
   encoding: unicode
-  database: _development
+  database: #{app_name}_development
   pool: 5
   username:
   password:
@@ -160,7 +156,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: _test
+  database: #{app_name}_test
   pool: 5
   username:
   password:
@@ -419,11 +415,41 @@ file 'app/assets/javascripts/xhr_fix.js',
 });
 }
 
+generate('simple_form:install --bootstrap')
+
 # ==============
 # JS
 # ==============
 
-generate('simple_form:install --bootstrap')
+run("jasmine init")
+run("rm spec/javascripts/PlayerSpec.js && rm spec/javascripts/helpers/SpecHelper.js && rm -rf public/javascripts && rm -f lib/tasks/jasmine.rake")
+run("mkdir -p spec/javascripts/support")
+download("http://sinonjs.org/releases/sinon-1.3.2.js", "spec/javascripts/support/sinon.js")
+
+[
+  "helpers",
+  "models",
+  "collections",
+  "routers",
+  "views",
+  "templates"
+].each do |js_dir|
+  run("mkdir app/assets/javascripts/#{js_dir}")
+  run("touch app/assets/javascripts/#{js_dir}/.gitkeep")
+end
+
+file("app/assets/javascripts/#{app_name}.js", %Q{var #{app_name} = {
+  Models: {},
+  Collections: {},
+  Views: {},
+  Routers: {},
+
+  init: function(){
+
+  }
+};
+
+})
 
 # ===========
 # BACKBONE
@@ -438,11 +464,9 @@ download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.bet
 # GUARD
 # ===========
 [
-  "",
   "spin",
-  "livereload",
   "bundler",
-  ""
+  "jasmine"
 ].each do |guard_item|
   run "bundle exec guard init #{guard_item}"
 end

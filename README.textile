@@ -30,6 +30,7 @@ h2. Testing
 * mocha
 * shoulda
 * postmaster_general
+* jasmine, sinonjs and jasminerice for clinet-side testing
 
 h2. Initializers
 
