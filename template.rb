@@ -120,6 +120,7 @@ file '.rspec',
 generate(:airbrake, '--api-key abcdefg123456')
 generate('devise:install')
 generate('bootstrap:install')
+generate('responders:install')
 
 run "rm app/assets/javascripts/bootstrap.js.coffee"
 run "rm app/assets/stylesheets/bootstrap.css.less"
