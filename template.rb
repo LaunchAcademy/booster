@@ -42,7 +42,7 @@ end
 file 'Gemfile', <<-END, :force => true
 source :rubygems
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.2'
 
 gem 'sqlite3'
 gem 'pg'
