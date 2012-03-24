@@ -72,16 +72,16 @@ gem "twitter-bootstrap-rails", "~> 2.0.1.0"
 
 group :development do
   gem 'rspec-rails'
-  
+
   gem 'guard'
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-spin'
-  
+
   gem 'rb-fsevent'
   gem 'growl'
-  
+
   gem 'heroku'
 end
 
@@ -135,7 +135,7 @@ require "factory_girl/step_definitions"
 # APP
 #====================
 
-file 'config/database_pg.example.yml', 
+file 'config/database_pg.example.yml',
 %q{ # PostgreSQL. Versions 7.4 and 8.x are supported.
 #
 # Install the ruby-postgres driver:
@@ -152,8 +152,8 @@ development:
   encoding: unicode
   database: _development
   pool: 5
-  username: 
-  password: 
+  username:
+  password:
 
 
 test:
@@ -161,12 +161,12 @@ test:
   encoding: unicode
   database: _test
   pool: 5
-  username: 
-  password: 
+  username:
+  password:
 
 }
 
-file 'app/helpers/application_helper.rb', 
+file 'app/helpers/application_helper.rb',
 %q{module ApplicationHelper
   def body_class
     "#{controller.controller_name} #{controller.controller_name}-#{controller.action_name}"
@@ -174,7 +174,7 @@ file 'app/helpers/application_helper.rb',
 end
 }, :force => true
 
-file 'app/views/layouts/_flashes.html.erb', 
+file 'app/views/layouts/_flashes.html.erb',
 %q{<div id="flash">
   <% flash.each do |key, value| -%>
     <div id="flash_<%= key %>"><%=h value %></div>
@@ -182,7 +182,7 @@ file 'app/views/layouts/_flashes.html.erb',
 </div>
 }
 
-file 'app/assets/javascripts/application.js', 
+file 'app/assets/javascripts/application.js',
 %q{
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
@@ -207,7 +207,7 @@ file 'app/assets/javascripts/application.js',
 
 }, force: true
 
-file 'app/assets/stylesheets/application.css', 
+file 'app/assets/stylesheets/application.css',
 %q{
   /*
    * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -231,8 +231,8 @@ file 'app/assets/stylesheets/application.css',
 file 'app/assets/stylesheets/ie7.css.scss', ""
 file 'app/assets/stylesheets/main.css.scss', ""
 
-file 'app/views/layouts/application.html.erb', 
-%q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+file 'app/views/layouts/application.html.erb',
+%q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
@@ -264,7 +264,7 @@ file 'app/views/layouts/application.html.erb',
 # INITIALIZERS
 #====================
 
-initializer 'smtp.rb', 
+initializer 'smtp.rb',
 %q{ActionMailer::Base.smtp_settings = {
     :address => "",
     :port    => 25,
@@ -283,7 +283,7 @@ initializer 'hosts.rb',
 ActionMailer::Base.default_url_options[:host] = configatron.default_host
 }
 
-initializer 'errors.rb', 
+initializer 'errors.rb',
 %q{# Example:
 #   begin
 #     some http call
@@ -300,7 +300,7 @@ HTTP_ERRORS = [Timeout::Error,
                Net::ProtocolError]
 }
 
-initializer 'time_formats.rb', 
+initializer 'time_formats.rb',
 %q{# Example time formats
 { :short_date => "%x", :long_date => "%a, %b %d, %Y" }.each do |k, v|
   Time::DATE_FORMATS.update(k => v)
@@ -347,13 +347,13 @@ end
 
 
 file 'app/assets/javascripts/xhr_fix.js',
-%q{jQuery.ajaxSetup({ 
+%q{jQuery.ajaxSetup({
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept",
-    "text/javascript")} 
+    "text/javascript")}
 });
 }
 
-file 'spec/spec_helper.rb', 
+file 'spec/spec_helper.rb',
 %q{
   require 'rubygems'
   require 'postmaster_general'
@@ -403,21 +403,21 @@ file 'spec/spec_helper.rb',
 # CSS
 # ====================
 
-from_repo("dpickett", "under_construction",  
+from_repo("dpickett", "under_construction",
   "stylesheets/under_construction.css",
   "app/assets/stylesheets/under_construction.css")
 
-from_repo("dpickett", "under_construction", 
-  "javascripts/jquery.under_construction.js",   
+from_repo("dpickett", "under_construction",
+  "javascripts/jquery.under_construction.js",
   "app/assets/javascripts/jquery.under_construction.js")
-  
+
 file 'app/assets/javascripts/xhr_fix.js',
-%q{jQuery.ajaxSetup({ 
+%q{jQuery.ajaxSetup({
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept",
-    "text/javascript")} 
+    "text/javascript")}
 });
 }
-  
+
 # ==============
 # JS
 # ==============
