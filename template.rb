@@ -105,7 +105,7 @@ END
 
 run 'bundle install'
 
-file '.rvmrc', "rvm 1.9.3@#{app_name}"
+file '.rvmrc', "rvm 1.9.3@#{app_name} --create"
 
 FileUtils.rm_rf("test")
 
