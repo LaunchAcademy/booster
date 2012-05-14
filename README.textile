@@ -6,7 +6,7 @@ h1. Ignition (LaunchWare's Rails Template)
   </code>
 *# create a rails app from this template
   <code>
-    rails <app_name> -m <path_to_repo>/template.rb
+    rails new <app_name> -m <path_to_repo>/template.rb
   </code>
   
 h2. Gems
