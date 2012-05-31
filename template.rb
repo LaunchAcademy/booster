@@ -79,6 +79,8 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-spin'
   gem 'guard-jasmine'
+  
+  gem 'sextant'
 
   gem 'rb-fsevent'
   gem 'growl'
