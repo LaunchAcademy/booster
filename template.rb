@@ -1,4 +1,5 @@
-# Enlightened template.rb
+# Ignition template.rb
+# LaunchWare, Inc.'s Rails Template
 # from Dan Pickett
 # based on Suspenders by Thoughtbot
 # influenced by Mike Gunderloy's rails template - http://gist.github.com/145676
