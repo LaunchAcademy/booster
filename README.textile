@@ -53,3 +53,9 @@ h2. JavaScript
 * JQuery UI (google hosted)
 * JQuery Rails.js
 * Backbone
+
+h2. MacOS X Developers
+
+p. Ignition is tested working on Lion running Xcode 4.2 or later.
+  
+p. Ignition will not install properly on Snow Leopard running Xcode 3.2.6.  Bundler exec for several tasks will fail for twitter-bootstrap-rails (2.0.1.0) with a gsub error.  The latest version of twitter-bootstrap-rails will fail with a uninitialized constant (V8::JSError) error in less.
