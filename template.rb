@@ -178,8 +178,7 @@ file 'app/views/layouts/_flashes.html.erb',
 }
 
 file 'app/assets/javascripts/application.js',
-%q{
-// This is a manifest file that'll be compiled into application.js, which will include all the files
+%q{// This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
@@ -203,8 +202,7 @@ file 'app/assets/javascripts/application.js',
 
 run 'mv app/assets/stylesheets/application.css app/assets/stylesheets/application.css.scss'
 file 'app/assets/stylesheets/application.css.scss',
-%q{
-/*
+%q{/*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -366,8 +364,7 @@ file 'app/assets/javascripts/xhr_fix.js',
 }
 
 file 'spec/spec_helper.rb',
-%q{
-  require 'rubygems'
+%q{require 'rubygems'
   require 'postmaster_general'
 
   ENV["RAILS_ENV"] ||= 'test'
@@ -435,8 +432,7 @@ end
 
 # Import base stylesheets
 file 'app/assets/stylesheets/base/_all.css.scss',
-%q{
-@import "reset";
+%q{@import "reset";
 @import "typography";
 @import "forms";
 }
@@ -516,8 +512,7 @@ td { vertical-align: top; }
 
 # Typography
 file 'app/assets/stylesheets/base/_typography.css.scss',
-%q{
-h1, h2, h3, h4, h5, h6 {
+%q{h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: $baseFontSize;
   color: $headerFontColor;
@@ -561,8 +556,7 @@ sub { bottom: -0.25em; }
 
 # Forms
 file 'app/assets/stylesheets/base/_forms.css.scss',
-%q{
-form { margin: 0; }
+%q{form { margin: 0; }
 fieldset { border: 0; margin: 0; padding: 0; }
 
 // Indicate that 'label' will shift focus to the associated form element
@@ -653,14 +647,12 @@ input:invalid, textarea:invalid { background-color: #f0dddd; }
 
 # Import layout stylesheets
 file 'app/assets/stylesheets/layout/_all.css.scss',
-%q{
-@import "containers";
+%q{@import "containers";
 }
 
 # Layout Containers
 file 'app/assets/stylesheets/layout/_containers.css.scss',
-%q{
-// Layout Containers
+%q{// Layout Containers
 }
 
 # ====================
@@ -669,16 +661,14 @@ file 'app/assets/stylesheets/layout/_containers.css.scss',
 
 # Import modules stylesheets
 file 'app/assets/stylesheets/modules/_all.css.scss',
-%q{
-@import "media";
+%q{@import "media";
 @import "navigation";
 @import "buttons";
 }
 
 # Button Styles
 file 'app/assets/stylesheets/modules/_buttons.css.scss',
-%q{
-.btn {
+%q{.btn {
   display: inline-block;
   padding: $btnBase ($btnBase * 2) ($btnBase + 1);
   margin: 0;
@@ -707,8 +697,7 @@ input[type=submit].button, button.button { -webkit-appearance: none; }
 
 # Media Object Styles
 file 'app/assets/stylesheets/modules/_media.css.scss',
-%q{
-.media,
+%q{.media,
 .media .media-body {
   overflow: hidden;
   *overflow: visible;
@@ -737,8 +726,7 @@ file 'app/assets/stylesheets/modules/_media.css.scss',
 
 # Navigation module Styles
 file 'app/assets/stylesheets/modules/_navigation.css.scss',
-%q{
-.nav {
+%q{.nav {
   height: $navBarHeight;
   padding: 0;
   margin: 0;
@@ -773,14 +761,12 @@ file 'app/assets/stylesheets/modules/_navigation.css.scss',
 
 # Import modules stylesheets
 file 'app/assets/stylesheets/non_modular/_all.css.scss',
-%q{
-// Import non-modular stylesheets
+%q{// Import non-modular stylesheets
 }
 
 # Helpers Stylesheet
 file 'app/assets/stylesheets/_helpers.css.scss',
-%q{
-// For image replacement
+%q{// For image replacement
 .is-text-hidden { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
 .is-text-hidden br { display: none; }
 
@@ -802,8 +788,7 @@ file 'app/assets/stylesheets/_helpers.css.scss',
 
 # Print Stylesheet
 file 'app/assets/stylesheets/_print.css.scss',
-%q{
-@media print {
+%q{@media print {
   * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
   a, a:visited { text-decoration: underline; }
   a[href]:after { content: " (" attr(href) ")"; }
@@ -821,8 +806,7 @@ file 'app/assets/stylesheets/_print.css.scss',
 
 # Settings Stylesheet
 file 'app/assets/stylesheets/_settings.css.scss',
-%q{
-// ============================================================================
+%q{// ============================================================================
 // Grid Settings
 // These settings override the defaults for Neat grid system
 // ============================================================================
