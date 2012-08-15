@@ -401,6 +401,16 @@ from_repo("dpickett", "under_construction",
   "stylesheets/under_construction.css",
   "app/assets/stylesheets/under_construction.css")
 
+[
+  "base",
+  "layout",
+  "modules",
+  "non_modular"
+].each do |css_dir|
+  run("mkdir app/assets/stylesheets/#{css_dir}")
+  run("touch app/assets/stylesheets/#{css_dir}/.gitkeep")
+end
+
 # ==============
 # Simpleform
 # ==============
