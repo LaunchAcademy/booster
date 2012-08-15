@@ -736,6 +736,7 @@ file 'app/assets/stylesheets/non_modular/_all.css.scss',
 
 }
 
+# Helpers Stylesheet
 file 'app/assets/stylesheets/_helpers.css.scss',
 %q{
   // For image replacement
@@ -756,6 +757,26 @@ file 'app/assets/stylesheets/_helpers.css.scss',
 
   .right { float: right; }
   .left { float: left; }
+
+}
+
+# Print Stylesheet
+file 'app/assets/stylesheets/_print.css.scss',
+%q{
+  @media print {
+    * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
+    a, a:visited { text-decoration: underline; }
+    a[href]:after { content: " (" attr(href) ")"; }
+    abbr[title]:after { content: " (" attr(title) ")"; }
+    .is-text-hidden a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
+    pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+    thead { display: table-header-group; } /* h5bp.com/t */
+    tr, img { page-break-inside: avoid; }
+    img { max-width: 100% !important; }
+    @page { margin: 0.5cm; }
+    p, h2, h3 { orphans: 3; widows: 3; }
+    h2, h3 { page-break-after: avoid; }
+  }
 
 }
 
