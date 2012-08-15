@@ -659,6 +659,7 @@ file 'app/assets/stylesheets/layout/_containers.css.scss',
 file 'app/assets/stylesheets/modules/_all.css.scss',
 %q{
   @import "media";
+  @import "navigation";
   @import "buttons";
 
 }
@@ -724,6 +725,40 @@ file 'app/assets/stylesheets/modules/_media.css.scss',
   }
 
 }
+
+# Navigation module Styles
+file 'app/assets/stylesheets/modules/_navigation.css.scss',
+%q{
+  .nav {
+    height: $navBarHeight;
+    padding: 0;
+    margin: 0;
+
+    > li {
+      float: left;
+      display: block;
+      border-right: 1px solid $grayBorder;
+      float: left;
+      display: block;
+      position: relative;
+      padding: 0;
+      margin: 0;
+      line-height: $navBarHeight - 2;
+
+      &:last-child, &.last {
+        border-right: none;
+      }
+
+      > a {
+        padding: 0 ($navBarHeight / 2);
+
+        &:hover { color: $linkHoverColor; }
+      }
+    }
+  }
+
+}
+
 
 # ====================
 # Non-Modular Stylessheets
