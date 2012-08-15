@@ -69,7 +69,6 @@ gem 'devise'
 gem 'configatron'
 gem 'bourbon'
 gem 'tab_menu'
-gem "twitter-bootstrap-rails", "~> 2.0.1.0"
 
 group :development do
   gem 'rspec-rails'
@@ -80,7 +79,7 @@ group :development do
   gem 'guard-bundler'
   gem 'guard-spin'
   gem 'guard-jasmine'
-  
+
   gem 'sextant'
 
   gem 'rb-fsevent'
@@ -127,11 +126,7 @@ file '.rspec',
 
 generate(:airbrake, '--api-key abcdefg123456')
 generate('devise:install')
-generate('bootstrap:install')
 generate('responders:install')
-
-run "rm app/assets/javascripts/bootstrap.js.coffee"
-run "rm app/assets/stylesheets/bootstrap.css.less"
 
 file 'features/support/factory_girl.rb',
 %q{require "factory_girl"
@@ -198,7 +193,6 @@ file 'app/assets/javascripts/application.js',
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require xhr_fix
 //= require underscore
 //= require backbone
@@ -220,7 +214,6 @@ file 'app/assets/stylesheets/application.css',
    * compiled file, but it's generally better to create a new file per style scope.
    *
    *= require_self
-   *= require twitter/bootstrap
    *= require under_construction
    *= require main
   */
@@ -419,7 +412,6 @@ file 'app/assets/javascripts/xhr_fix.js',
 });
 }
 
-generate('simple_form:install --bootstrap')
 
 # ==============
 # JS
