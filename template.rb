@@ -217,9 +217,8 @@ file 'app/assets/stylesheets/application.css.scss',
 // Settings
 @import "settings";
 
-// Thoughtbot's Bourbon Mixins & Neat Grid System
+// Thoughtbot's Bourbon Mixins
 @import "bourbon";
-@import "neat/neat";
 
 // Base Styles
 @import "base/all";
