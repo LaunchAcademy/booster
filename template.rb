@@ -725,6 +725,17 @@ file 'app/assets/stylesheets/modules/_media.css.scss',
 
 }
 
+# ====================
+# Non-Modular Stylessheets
+# ====================
+
+# Import modules stylesheets
+file 'app/assets/stylesheets/non_modular/_all.css.scss',
+%q{
+  // Import non-modular stylesheets
+
+}
+
 # ==============
 # Simpleform
 # ==============
