@@ -242,9 +242,6 @@ file 'app/assets/stylesheets/application.css.scss',
 @import "print";
 }, force: true
 
-file 'app/assets/stylesheets/ie7.css.scss', ""
-file 'app/assets/stylesheets/main.css.scss', ""
-
 file 'app/views/layouts/application.html.erb',
 %q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
