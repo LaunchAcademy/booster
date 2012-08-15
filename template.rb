@@ -953,6 +953,10 @@ file("app/assets/javascripts/#{app_name}.js", %Q{var #{app_name} = {
 
 })
 
+# IE7 Box Sizing Polyfill
+run("mkdir -p spec/javascripts/vendor/htc")
+download("https://raw.github.com/Schepp/box-sizing-polyfill/master/boxsizing.htc", "app/assets/javascripts/vendor/htc/boxsizing.htc")
+
 # ===========
 # BACKBONE
 # ===========
