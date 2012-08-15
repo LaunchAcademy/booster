@@ -651,6 +651,80 @@ file 'app/assets/stylesheets/layout/_containers.css.scss',
 
 }
 
+# ====================
+# Module Stylessheets
+# ====================
+
+# Import modules stylesheets
+file 'app/assets/stylesheets/modules/_all.css.scss',
+%q{
+  @import "media";
+  @import "buttons";
+
+}
+
+# Button Styles
+file 'app/assets/stylesheets/modules/_buttons.css.scss',
+%q{
+  .btn {
+    display: inline-block;
+    padding: $btnBase ($btnBase * 2) ($btnBase + 1);
+    margin: 0;
+    width: auto;
+    border: none;
+    outline: none;
+    background-color: $btnBaseColor;
+    @include border-radius($btnRadius);
+    @include transition(background-color, .10s, ease-in-out);
+    color: $white;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: normal;
+    font-size: $btnBaseFontSize; // 15px
+    font-weight: bold;
+
+    &:hover {
+      color: $white;
+      background-color: lighten($btnBaseColor, 20%);
+    }
+  }
+
+  input[type=submit].button, button.button { -webkit-appearance: none; }
+
+}
+
+# Media Object Styles
+file 'app/assets/stylesheets/modules/_media.css.scss',
+%q{
+  .media,
+  .media .media-body {
+    overflow: hidden;
+    *overflow: visible;
+    zoom: 1;
+  }
+
+  .media {
+    margin-bottom: 1em;
+  }
+
+  .media-object {
+    float: left;
+    margin-right: 1em;
+
+    &.flipped {
+      float: right;
+      margin-right: 0;
+      margin-left: 1em;
+    }
+  }
+
+  .media-body {
+    > :last-child { margin-bottom: 0; }
+  }
+
+}
+
 # ==============
 # Simpleform
 # ==============
