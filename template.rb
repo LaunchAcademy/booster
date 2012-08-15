@@ -401,6 +401,12 @@ from_repo("dpickett", "under_construction",
   "stylesheets/under_construction.css",
   "app/assets/stylesheets/under_construction.css")
 
+# ==============
+# Simpleform
+# ==============
+
+generate('simple_form:install')
+
 from_repo("dpickett", "under_construction",
   "javascripts/jquery.under_construction.js",
   "app/assets/javascripts/jquery.under_construction.js")
