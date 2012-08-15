@@ -736,6 +736,29 @@ file 'app/assets/stylesheets/non_modular/_all.css.scss',
 
 }
 
+file 'app/assets/stylesheets/_helpers.css.scss',
+%q{
+  // For image replacement
+  .is-text-hidden { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; *line-height: 0; }
+  .is-text-hidden br { display: none; }
+
+  // Hide from both screenreaders and browsers: h5bp.com/u
+  .is-hidden { display: none !important; visibility: hidden; }
+
+  // Hide only visually, but have it available for screenreaders: h5bp.com/v
+  .is-visually-hidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+  // Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
+  .is-visually-hidden.focusable:active, .is-visually-hidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+  // Hide visually and from screenreaders, but maintain layout
+  .is-invisible { visibility: hidden; }
+
+  .right { float: right; }
+  .left { float: left; }
+
+}
+
 # ==============
 # Simpleform
 # ==============
