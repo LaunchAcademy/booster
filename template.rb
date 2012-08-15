@@ -839,11 +839,9 @@ $btnBaseFontSize: 1.153846154em;
 // Font stacks
 // There are more included by default from Bourbon
 $arial: Arial, "Helvetica Neue", Helvetica, sans-serif;
-$sirba: "sirba-web-1","sirba-web-2"; // Typekit webfont
-$bree: "bree-serif-1","bree-serif-2"; // Typekit webfont
 
-$bodyFontFamily: $arial;
-$headerFontFamily: $sirba;
+$bodyFontFamily: $helvetica;
+$headerFontFamily: $helvetica;
 $headerFontColor: #658193;
 $headerFontWeight: normal;
 
