@@ -253,7 +253,6 @@ file 'app/views/layouts/application.html.erb',
     <%= csrf_meta_tag %>
 
     <%= stylesheet_link_tag "application" %>
-    <!--[if lte IE 7]><%= stylesheet_link_tag "ie7" %><![endif]-->
 
     <%= yield :extra_header %>
   </head>
