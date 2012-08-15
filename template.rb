@@ -633,6 +633,24 @@ file 'app/assets/stylesheets/base/_forms.css.scss',
 
 }
 
+# ====================
+# Layout Stylessheets
+# ====================
+
+# Import layout stylesheets
+file 'app/assets/stylesheets/layout/_all.css.scss',
+%q{
+  @import "containers";
+
+}
+
+# Layout Containers
+file 'app/assets/stylesheets/layout/_containers.css.scss',
+%q{
+  // Layout Containers
+
+}
+
 # ==============
 # Simpleform
 # ==============
