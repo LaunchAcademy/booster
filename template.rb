@@ -170,10 +170,10 @@ end
 }, :force => true
 
 file 'app/views/layouts/_flashes.html.erb',
-%q{<div id="flash">
+%q{<div class="l-flashes">
   <% flash.each do |key, value| -%>
-    <div id="flash_<%= key %>"><%=h value %></div>
-  <% end -%>
+    <div class="flash flash-<%= key %>"><%=h value %></div>
+  <% end %>
 </div>
 }
 
@@ -629,8 +629,8 @@ textarea {
 input:valid, textarea:valid {  }
 input:invalid, textarea:invalid { background-color: #f0dddd; }
 
-// Simpleform stuff
-.help-inline {
+// Errors
+.error {
   display: inline-block;
   margin-bottom: $formSpacing;
   color: $errorFontColor;
@@ -659,8 +659,25 @@ file 'app/assets/stylesheets/layout/_containers.css.scss',
 # Import modules stylesheets
 file 'app/assets/stylesheets/modules/_all.css.scss',
 %q{@import "media";
+@import "flashes";
 @import "navigation";
 @import "buttons";
+}
+
+# Flash Styles
+file 'app/assets/stylesheets/modules/_flashes.css.scss',
+%q{.flash {
+  padding: 20px;
+  text-align: center;
+}
+
+.flash-error {
+  background: $errorColor;
+}
+
+.flash-notice {
+  background: $noticeColor;
+}
 }
 
 # Button Styles
@@ -849,7 +866,7 @@ $headerFontWeight: normal;
 // Font Sizes
 // ============================================================================
 
-$baseFontSize: 13px; // 13px
+$baseFontSize: 16px;
 
 // ============================================================================
 // Navigation
@@ -868,7 +885,7 @@ $grayBorder: #e1e1e1;
 // Forms
 // ============================================================================
 
-$formSpacing: 13px;
+$formSpacing: $baseFontSize;
 
 // ============================================================================
 // Flashes
@@ -876,6 +893,9 @@ $formSpacing: 13px;
 
 $errorFontColor: $white;
 $errorColor: #fe8c8c;
+
+$noticeFontColor: $white;
+$noticeColor: #07a300;
 
 // ============================================================================
 // Misc
