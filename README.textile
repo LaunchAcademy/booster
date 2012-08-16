@@ -37,7 +37,6 @@ h2. Initializers
 * action_mailer setup
 * airbrake setup
 * validation_fix - make fieldWithErrors element a &lt;span&gt;
-* hoptoad - setup hoptoad
 * debugging stuff
 * pry
 
