@@ -410,10 +410,6 @@ file 'spec/spec_helper.rb',
 # CSS
 # ====================
 
-from_repo("dpickett", "under_construction",
-  "stylesheets/under_construction.css",
-  "app/assets/stylesheets/under_construction.css")
-
 [
   "base",
   "layout",
@@ -914,10 +910,6 @@ generate('simple_form:install')
 # ==============
 # JS
 # ==============
-
-from_repo("dpickett", "under_construction",
-  "javascripts/jquery.under_construction.js",
-  "app/assets/javascripts/jquery.under_construction.js")
 
 file 'app/assets/javascripts/xhr_fix.js',
 %q{jQuery.ajaxSetup({
