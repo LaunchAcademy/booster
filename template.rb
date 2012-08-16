@@ -45,7 +45,6 @@ source :rubygems
 
 gem 'rails', '3.2.8'
 
-gem 'sqlite3'
 gem 'pg'
 
 group :assets do
