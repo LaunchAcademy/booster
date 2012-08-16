@@ -1003,3 +1003,10 @@ db/structure.sql
 git :init
 git :add => "."
 git :commit => "-a -m 'Initial project commit'"
+
+puts "**********************************************************"
+puts "We have liftoff! Don't forget to:"
+puts "* set up your smtp configuration"
+puts "* set a proper airbrake key"
+puts "* set up proper hostnames in the hosts.rb initializer"
+puts "**********************************************************"
