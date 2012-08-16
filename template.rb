@@ -79,6 +79,7 @@ group :development do
   gem 'guard-spin'
   gem 'guard-jasmine'
 
+  #get Rails 4 route listing in browser before Rails 4
   gem 'sextant'
 
   gem 'rb-fsevent'
