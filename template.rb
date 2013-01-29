@@ -123,6 +123,25 @@ file '.rspec',
   --format Fuubar
 }, force: true
 
+file 'spec/support/database_cleaner_helper.rb',
+%q{RSpec.configure do |config|
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+end
+}
+
 
 generate(:airbrake, '--api-key abcdefg123456')
 generate('devise:install')
