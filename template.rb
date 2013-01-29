@@ -985,6 +985,35 @@ file("app/assets/javascripts/#{app_name}.js", %Q{var #{app_name} = {
 
 })
 
+file('script/cibuild',
+%Q{#!/bin/bash
+
+run_build(){
+  source ~/.rvm/scripts/rvm
+  PATH="$PATH:/usr/local/bin"
+  export CI=true
+  rvm rvmrc trust .
+  source .rvmrc
+  gem install bundler
+  bundle
+  cp -n config/database.example.yml config/database.yml
+  bundle exec rake db:drop db:create db:migrate
+  bundle exec rake db:drop db:create db:migrate RAILS_ENV=test
+  rake
+}
+
+clean_up(){
+  #clean up
+  rm -f log/test.log && rm -rf public/system/tmp && rm -rf public/uploads/tmp && rm -rf tmp/*
+}
+
+run_build
+build_result=$?
+clean_up
+
+exit $build_result
+}
+
 # IE7 Box Sizing Polyfill
 run("mkdir  spec/javascripts/vendor")
 run("mkdir  spec/javascripts/vendor/htc")
