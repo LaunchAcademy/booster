@@ -1000,6 +1000,8 @@ run "rm README"
 
 run 'rake db:migrate'
 
+run 'cp config/environments/production.rb config/environments/staging.rb'
+
 # Set up gitignore and commit base state
 file '.gitignore', %q{
 .bundle
