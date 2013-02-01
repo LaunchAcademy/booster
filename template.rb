@@ -1014,6 +1014,17 @@ clean_up
 exit $build_result
 }
 
+file('script/stage',
+%Q{#!/bin/bash
+
+echo "Deploy!"
+git checkout staging && git merge master && git pull origin staging && git push origin staging && git push staging staging:master
+echo "Migrating..."
+heroku run rake db:migrate -a $staging_app_name
+echo "Deploy Complete"
+git checkout master
+}
+
 # IE7 Box Sizing Polyfill
 run("mkdir  spec/javascripts/vendor")
 run("mkdir  spec/javascripts/vendor/htc")
