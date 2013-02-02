@@ -1,15 +1,18 @@
-h1. Ignition (LaunchWare's Rails Template)
+# Ignition (LaunchWare's Rails Template)
 
 * clone this repo
-  <code>
-    git clone git://github.com/LaunchWare/ignition.git
-  </code>
-* create a rails app from this template
-  <code>
-    rails new <app_name> -m <path_to_repo>/template.rb
-  </code>
 
-h2. Gems
+    ```
+      git clone git://github.com/LaunchWare/ignition.git
+    ```
+
+* create a rails app from this template
+
+    ```
+      rails new <app_name> -m <path_to_repo>/template.rb
+    ```
+
+## Gems
 
 * [Devise](https://github.com/plataformatec/devise)
 * [kaminari](https://github.com/amatsuda/kaminari)
@@ -21,7 +24,7 @@ h2. Gems
 * [Guard](https://github.com/guard/guard) (livereload, rspec, bundler, spin)
 * [Pry](https://github.com/pry/pry)
 
-h2. Testing
+## Testing
 
 * [Rspec](https://github.com/rspec/rspec)
 * [factory_girl](https://github.com/thoughtbot/factory_girl)
@@ -31,7 +34,7 @@ h2. Testing
 * [postmaster_general](https://github.com/dpickett/postmaster_general)
 * jasmine, sinonjs and jasminerice for client-side testing
 
-h2. Initializers
+## Initializers
 
 * action_mailer setup
 * airbrake setup
@@ -39,20 +42,20 @@ h2. Initializers
 * debugging stuff
 * pry
 
-h2. CSS
+## CSS
 
 * Eric Meyer's Reset
 * [bourbon](https://github.com/thoughtbot/bourbon)
 * conditional IE6/IE7 stylesheets
 
-h2. JavaScript
+## JavaScript
 
 * [JQuery](http://jquery.com/) (google hosted)
 * [JQuery UI](http://jqueryui.com/) (google hosted)
 * JQuery Rails.js
 * [Backbone](http://backbonejs.org/)
 
-h2. MacOS X Developers
+## MacOS X Developers
 
-p. Ignition is tested and working on Lion running Xcode 4.2 or later.
+Ignition is tested and working on Lion running Xcode 4.2 or later.
 
