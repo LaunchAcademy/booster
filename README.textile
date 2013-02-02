@@ -1,58 +1,58 @@
 h1. Ignition (LaunchWare's Rails Template)
 
-*# clone this repo
+* clone this repo
   <code>
     git clone git://github.com/LaunchWare/ignition.git
   </code>
-*# create a rails app from this template
+* create a rails app from this template
   <code>
     rails new <app_name> -m <path_to_repo>/template.rb
   </code>
 
 h2. Gems
 
-* Devise
-* kaminari
-* Inherited Resources
-* Simple Form
-* Airbrake
-* Configatron
-* Tab Menu
-* Heroku
-* Guard (livereload, rspec, bundler, spin)
-* Pry
+* [Devise](https://github.com/plataformatec/devise)
+* [kaminari](https://github.com/amatsuda/kaminari)
+* [Inherited Resources](https://github.com/josevalim/inherited_resources)
+* [Simple Form](https://github.com/plataformatec/simple_form)
+* [Airbrake](https://github.com/airbrake/airbrake)
+* [Configatron](https://github.com/markbates/configatron)
+* [Tab Menu](https://github.com/dpickett/tab_menu)
+* [Guard](https://github.com/guard/guard) (livereload, rspec, bundler, spin)
+* [Pry](https://github.com/pry/pry)
 
 h2. Testing
 
-* Rspec
-* factory_girl
-* capybara
-* mocha
-* shoulda
-* postmaster_general
+* [Rspec](https://github.com/rspec/rspec)
+* [factory_girl](https://github.com/thoughtbot/factory_girl)
+* [capybara](https://github.com/jnicklas/capybara)
+* [mocha](https://github.com/visionmedia/mocha)
+* [shoulda](https://github.com/thoughtbot/shoulda)
+* [postmaster_general](https://github.com/dpickett/postmaster_general)
 * jasmine, sinonjs and jasminerice for client-side testing
 
 h2. Initializers
 
 * action_mailer setup
 * airbrake setup
-* validation_fix - make fieldWithErrors element a &lt;span&gt;
+* [validation_fix](http://launchware.com/articles/rails-validation-fieldwitherrors-annoyance) - make fieldWithErrors element a &lt;span&gt;
 * debugging stuff
 * pry
 
 h2. CSS
 
 * Eric Meyer's Reset
-* bourbon
+* [bourbon](https://github.com/thoughtbot/bourbon)
 * conditional IE6/IE7 stylesheets
 
 h2. JavaScript
 
-* JQuery (google hosted)
-* JQuery UI (google hosted)
+* [JQuery](http://jquery.com/) (google hosted)
+* [JQuery UI](http://jqueryui.com/) (google hosted)
 * JQuery Rails.js
-* Backbone
+* [Backbone](http://backbonejs.org/)
 
 h2. MacOS X Developers
 
 p. Ignition is tested and working on Lion running Xcode 4.2 or later.
+

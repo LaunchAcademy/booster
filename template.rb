@@ -84,8 +84,6 @@ group :development do
 
   gem 'rb-fsevent'
   gem 'growl'
-
-  gem 'heroku'
 end
 
 group :test do
