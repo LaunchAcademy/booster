@@ -76,7 +76,7 @@ group :development do
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-bundler'
-  gem 'guard-spin'
+  gem 'guard-zeus'
   gem 'guard-jasmine'
 
   #get Rails 4 route listing in browser before Rails 4
@@ -984,7 +984,7 @@ file("app/assets/javascripts/#{app_name}.js", %Q{var #{app_name} = {
 })
 
 file('script/cibuild',
-%Q{#!/bin/bash
+%q{#!/bin/bash
 
 run_build(){
   source ~/.rvm/scripts/rvm
@@ -1010,10 +1010,10 @@ build_result=$?
 clean_up
 
 exit $build_result
-}
+})
 
 file('script/stage',
-%Q{#!/bin/bash
+%q{#!/bin/bash
 
 echo "Deploy to staging!"
 git checkout staging && git merge master && git pull origin staging && git push origin staging && git push staging staging:master
@@ -1024,7 +1024,7 @@ git checkout master
 })
 
 file('script/production',
-%Q{#!/bin/bash
+%q{#!/bin/bash
 
 echo "Deploy to production!"
 git checkout production && git merge staging && git pull origin production && git push origin production && git push production production:master
@@ -1032,7 +1032,7 @@ echo "Migrating..."
 heroku run rake db:migrate -a $production_app_name
 echo "Deploy Complete"
 git checkout master
-)
+})
 
 # IE7 Box Sizing Polyfill
 run("mkdir  spec/javascripts/vendor")
@@ -1052,12 +1052,13 @@ download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.bet
 # GUARD
 # ===========
 [
-  "spin",
   "bundler",
   "jasmine"
 ].each do |guard_item|
   run "bundle exec guard init #{guard_item}"
 end
+
+run 'zeus init'
 
 # ====================
 # FINALIZE

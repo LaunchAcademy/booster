@@ -21,7 +21,7 @@
 * [Airbrake](https://github.com/airbrake/airbrake)
 * [Configatron](https://github.com/markbates/configatron)
 * [Tab Menu](https://github.com/dpickett/tab_menu)
-* [Guard](https://github.com/guard/guard) (livereload, rspec, bundler, spin)
+* [Guard](https://github.com/guard/guard) (livereload, rspec, bundler, zeus)
 * [Pry](https://github.com/pry/pry)
 
 ## Testing
