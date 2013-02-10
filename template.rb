@@ -403,6 +403,8 @@ file 'spec/spec_helper.rb',
   require 'database_cleaner'
   require 'shoulda'
   require 'capybara/rspec'
+  require 'mocha/api'
+
   PostmasterGeneral.log_directory = Rails.root.join("tmp/rendered_emails")
 
   # Requires supporting ruby files with custom matchers and macros, etc,
