@@ -161,8 +161,9 @@ development:
   encoding: unicode
   database: #{app_name}_development
   pool: 5
-  username:
-  password:
+  username: app
+  password: qwerty
+  host: 127.0.0.1
 
 
 test:
@@ -170,10 +171,14 @@ test:
   encoding: unicode
   database: #{app_name}_test
   pool: 5
-  username:
-  password:
+  username: app
+  password: qwerty
+  host: 127.0.0.1
 
 }
+
+run 'cp config/database_pg.example.yml config/database.yml'
+run 'rake db:create'
 
 file 'app/helpers/application_helper.rb',
 %q{module ApplicationHelper
