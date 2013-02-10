@@ -32,7 +32,7 @@
 * [mocha](https://github.com/visionmedia/mocha)
 * [shoulda](https://github.com/thoughtbot/shoulda)
 * [postmaster_general](https://github.com/dpickett/postmaster_general)
-* jasmine, sinonjs and jasminerice for client-side testing
+* [konacha](https://github.com/jfirebaugh/konacha)
 
 ## Initializers
 

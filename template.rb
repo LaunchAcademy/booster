@@ -77,13 +77,17 @@ group :development do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-zeus'
-  gem 'guard-jasmine'
+  gem 'guard-konacha'
+  gem 'konacha'
 
   #get Rails 4 route listing in browser before Rails 4
   gem 'sextant'
 
   gem 'rb-fsevent'
   gem 'growl'
+
+  gem 'poltergeist',
+    git: 'https://github.com/jonleighton/poltergeist.git'
 end
 
 group :test do
@@ -307,6 +311,18 @@ initializer 'smtp.rb',
 }
 }
 
+initializer 'konacha.rb',
+%q{if defined?(Konacha)
+  require 'capybara/poltergeist'
+  Konacha.configure do |config|
+    config.spec_dir     = 'spec/javascripts'
+    config.spec_matcher = /_spec\.|_test\./
+    config.driver       = :poltergeist
+    config.stylesheets  = %w(application)
+  end
+end
+}
+
 initializer 'hosts.rb',
 %q{configatron.default_host = {
   :development => "localhost:3000",
@@ -381,6 +397,16 @@ inside('spec') do
   FileUtils.touch("support/factories.rb")
 end
 
+file 'spec/javascripts/spec_helper.js.coffee', 
+%q{
+  #= require 'application'
+
+  Konacha.mochaOptions.ignoreLeaks = true
+
+  beforeEach ->
+    @page = $('#konacha')
+
+}
 
 file 'app/assets/javascripts/xhr_fix.js',
 %q{jQuery.ajaxSetup({
@@ -948,8 +974,6 @@ file 'app/assets/javascripts/xhr_fix.js',
 });
 }
 
-run("jasmine init")
-run("rm spec/javascripts/PlayerSpec.js && rm spec/javascripts/helpers/SpecHelper.js && rm -rf public/javascripts && rm -f lib/tasks/jasmine.rake")
 run("mkdir -p spec/javascripts/support")
 download("http://sinonjs.org/releases/sinon-1.3.2.js", "spec/javascripts/support/sinon.js")
 
