@@ -663,7 +663,7 @@ textarea {
   display: block;
   width: 100%;
   border: 1px solid darken($white, 20%);
-  @include border-radius(3px);
+  border-radius: 3px;
   @include box-shadow(inset 0 1px 2px rgba(0,0,0,0.1));
   color: rgba(0,0,0,0.75);
   margin: 0 0 $formSpacing 0;
@@ -742,7 +742,7 @@ file 'app/assets/stylesheets/modules/_buttons.css.scss',
   border: none;
   outline: none;
   background-color: $btnBaseColor;
-  @include border-radius($btnRadius);
+  border-radius: $btnRadius;
   @include transition(background-color, .10s, ease-in-out);
   color: $white;
   cursor: pointer;
