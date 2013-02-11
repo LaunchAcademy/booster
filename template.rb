@@ -402,7 +402,7 @@ inside('spec') do
   FileUtils.touch("support/factories.rb")
 end
 
-file 'spec/javascripts/spec_helper.js.coffee', 
+file 'spec/javascripts/spec_helper.js.coffee',
 %q{
   #= require 'application'
 
@@ -994,7 +994,7 @@ download("http://sinonjs.org/releases/sinon-1.3.2.js", "spec/javascripts/support
   run("touch app/assets/javascripts/#{js_dir}/.gitkeep")
 end
 
-file("app/assets/javascripts/#{app_name}.js", %Q{var #{app_name} = {
+file("app/assets/javascripts/#{app_name}.js", %Q{var #{app_name.classify} = {
   Models: {},
   Collections: {},
   Views: {},
