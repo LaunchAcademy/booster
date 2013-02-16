@@ -94,6 +94,7 @@ group :test do
   gem 'mocha'
   gem 'bourne'
   gem 'factory_girl'
+  gem 'valid_attribute'
   gem 'shoulda'
   gem "capybara"
   gem 'database_cleaner'
@@ -433,6 +434,7 @@ file 'spec/spec_helper.rb',
   require 'shoulda'
   require 'capybara/rspec'
   require 'mocha/api'
+  require 'valid_attribute'
 
   PostmasterGeneral.log_directory = Rails.root.join("tmp/rendered_emails")
 

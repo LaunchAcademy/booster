@@ -32,6 +32,7 @@
 * [shoulda](https://github.com/thoughtbot/shoulda)
 * [postmaster_general](https://github.com/dpickett/postmaster_general)
 * [konacha](https://github.com/jfirebaugh/konacha)
+* [valid_attribute](https://github.com/bcardarella/valid_attribute)
 
 ## Initializers
 
