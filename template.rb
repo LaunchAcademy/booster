@@ -93,7 +93,7 @@ group :test do
   gem 'rspec-rails'
   gem 'mocha'
   gem 'bourne'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'valid_attribute'
   gem 'shoulda'
   gem "capybara"
