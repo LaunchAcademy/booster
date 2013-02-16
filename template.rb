@@ -1058,19 +1058,15 @@ echo "Deploy Complete"
 git checkout master
 })
 
-# IE7 Box Sizing Polyfill
-run("mkdir  spec/javascripts/vendor")
-run("mkdir  spec/javascripts/vendor/htc")
-download("https://raw.github.com/Schepp/box-sizing-polyfill/master/boxsizing.htc", "app/assets/javascripts/vendor/htc/boxsizing.htc")
-
 # ===========
 # BACKBONE
 # ===========
 
-download("http://documentcloud.github.com/backbone/backbone.js", "app/assets/javascripts/backbone.js")
-download("http://documentcloud.github.com/underscore/underscore.js", "app/assets/javascripts/underscore.js")
-download("https://raw.github.com/douglascrockford/JSON-js/master/json2.js", "app/assets/javascripts/json2.js")
-download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.beta.3.js", "app/assets/javascripts/handlebars.js")
+run("mkdir app/assets/javascripts/vendor")
+download("http://documentcloud.github.com/backbone/backbone.js", "app/assets/javascripts/vendor/backbone.js")
+download("http://documentcloud.github.com/underscore/underscore.js", "app/assets/javascripts/vendor/underscore.js")
+download("https://raw.github.com/douglascrockford/JSON-js/master/json2.js", "app/assets/javascripts/vendor/json2.js")
+download("https://github.com/downloads/wycats/handlebars.js/handlebars.1.0.0.beta.3.js", "app/assets/javascripts/vendor/handlebars.js")
 
 # ===========
 # GUARD
