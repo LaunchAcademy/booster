@@ -64,7 +64,6 @@ gem 'simple_form'
 gem 'erubis'
 gem 'airbrake'
 gem 'haml'
-gem 'devise'
 gem 'configatron'
 gem 'bourbon'
 gem 'tab_menu'
@@ -146,7 +145,6 @@ end
 
 
 generate(:airbrake, '--api-key abcdefg123456')
-generate('devise:install')
 generate('responders:install')
 
 #====================
