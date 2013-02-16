@@ -1115,6 +1115,30 @@ end
 
 run 'zeus init'
 
+file('zeus.json', %q{
+{
+  "command": "ruby -rubygems -r./custom_plan -eZeus.go",
+
+  "plan": {
+    "boot": {
+      "default_bundle": {
+        "development_environment": {
+          "prerake": {"rake": []},
+          "runner": ["r"],
+          "console": ["c"],
+          "server": ["s"],
+          "generate": ["g"],
+          "destroy": ["d"],
+          "dbconsole": []
+        },
+        "test_environment": {
+          "test_helper": {"test": ["rspec", "testrb"]}
+        }
+      }
+    }
+  }
+}
+})
 # ====================
 # FINALIZE
 # ====================
