@@ -232,11 +232,11 @@ file 'app/assets/stylesheets/application.css.scss',
  *
 */
 
-// Settings
-@import "settings";
-
 // Thoughtbot's Bourbon Mixins
 @import "bourbon";
+
+// Settings
+@import "settings";
 
 // Base Styles
 @import "base/all";
