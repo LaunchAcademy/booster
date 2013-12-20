@@ -7,6 +7,9 @@
 require 'open-uri'
 require 'yaml'
 require 'base64'
+require 'fileutils'
+require 'active_support/inflector'
+require 'active_support/core_ext/string/inflections'
 
 def self.prepend_to_file(path, string)
   Tempfile.open File.basename(path) do |tempfile|
@@ -41,29 +44,35 @@ end
 #====================
 
 file 'Gemfile', <<-END, :force => true
-source :rubygems
+source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '4.1.0.beta1'
 
 gem 'pg'
 
-group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
-  gem 'bourbon'
-end
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
 
 gem 'jquery-rails'
 
-gem 'bluecloth', '~> 2.0'
 gem 'kaminari'
 # gem 'slugged'
 gem 'inherited_resources'
 gem 'simple_form'
 gem 'erubis'
 gem 'airbrake'
-gem 'haml'
 gem 'configatron'
 gem 'bourbon'
 gem 'tab_menu'
@@ -75,18 +84,16 @@ group :development do
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-bundler'
-  gem 'guard-zeus'
   gem 'guard-konacha'
   gem 'konacha'
-
-  #get Rails 4 route listing in browser before Rails 4
-  gem 'sextant'
 
   gem 'rb-fsevent'
   gem 'growl'
 
   gem 'poltergeist',
     git: 'https://github.com/jonleighton/poltergeist.git'
+
+  gem 'spring'
 end
 
 group :test do
@@ -99,15 +106,12 @@ group :test do
   gem "capybara"
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'postmaster_general', '~> 0.1'
   # Pretty printed test output
   gem 'fuubar'
 end
 
 group :development, :test do
-  gem 'jasmine'
-  gem 'jasminerice'
-  gem 'pry'
+  gem 'pry-rails'
 end
 
 END
@@ -116,7 +120,7 @@ run 'bundle install'
 
 file '.rvmrc', "rvm 1.9.3@#{app_name} --create"
 
-FileUtils.rm_rf("test")
+::FileUtils.rm_rf("test")
 
 generate("rspec:install")
 file '.rspec',
@@ -398,7 +402,7 @@ capify!
 
 inside('spec') do
   run "mkdir support"
-  FileUtils.touch("support/factories.rb")
+  ::FileUtils.touch("support/factories.rb")
 end
 
 file 'spec/javascripts/spec_helper.js.coffee',
@@ -421,7 +425,6 @@ file 'app/assets/javascripts/xhr_fix.js',
 
 file 'spec/spec_helper.rb',
 %q{require 'rubygems'
-require 'postmaster_general'
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -435,8 +438,6 @@ require 'shoulda'
 require 'capybara/rspec'
 require 'mocha/api'
 require 'valid_attribute'
-
-PostmasterGeneral.log_directory = Rails.root.join("tmp/rendered_emails")
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -989,19 +990,6 @@ download("http://sinonjs.org/releases/sinon-1.3.2.js", "spec/javascripts/support
   run("touch app/assets/javascripts/#{js_dir}/.gitkeep")
 end
 
-file("app/assets/javascripts/#{app_name}.js", %Q{var #{app_name.classify} = {
-  Models: {},
-  Collections: {},
-  Views: {},
-  Routers: {},
-
-  init: function(){
-
-  }
-};
-
-})
-
 file('script/cibuild',
 %q{#!/bin/bash
 
@@ -1090,7 +1078,6 @@ guard :konacha,
 end
 
 guard 'rspec',
-  zeus: true,
   all_on_start: false,
   all_after_pass: false do
 
@@ -1108,32 +1095,6 @@ guard 'rspec',
 end
 }
 
-run 'zeus init'
-
-file('zeus.json', %q{
-{
-  "command": "ruby -rubygems -r./custom_plan -eZeus.go",
-
-  "plan": {
-    "boot": {
-      "default_bundle": {
-        "development_environment": {
-          "prerake": {"rake": []},
-          "runner": ["r"],
-          "console": ["c"],
-          "server": ["s"],
-          "generate": ["g"],
-          "destroy": ["d"],
-          "dbconsole": []
-        },
-        "test_environment": {
-          "test_helper": {"test": ["rspec", "testrb"]}
-        }
-      }
-    }
-  }
-}
-})
 # ====================
 # FINALIZE
 # ====================

@@ -20,7 +20,7 @@
 * [Airbrake](https://github.com/airbrake/airbrake)
 * [Configatron](https://github.com/markbates/configatron)
 * [Tab Menu](https://github.com/dpickett/tab_menu)
-* [Guard](https://github.com/guard/guard) (livereload, rspec, bundler, zeus)
+* [Guard](https://github.com/guard/guard) (livereload, rspec, bundler)
 * [Pry](https://github.com/pry/pry)
 
 ## Testing
@@ -30,7 +30,6 @@
 * [capybara](https://github.com/jnicklas/capybara)
 * [mocha](https://github.com/visionmedia/mocha)
 * [shoulda](https://github.com/thoughtbot/shoulda)
-* [postmaster_general](https://github.com/dpickett/postmaster_general)
 * [konacha](https://github.com/jfirebaugh/konacha)
 * [valid_attribute](https://github.com/bcardarella/valid_attribute)
 
