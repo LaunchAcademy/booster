@@ -118,8 +118,6 @@ END
 
 run 'bundle install'
 
-file '.rvmrc', "rvm 1.9.3@#{app_name} --create"
-
 ::FileUtils.rm_rf("test")
 
 generate("rspec:install")
@@ -997,8 +995,6 @@ run_build(){
   source ~/.rvm/scripts/rvm
   PATH="$PATH:/usr/local/bin"
   export CI=true
-  rvm rvmrc trust .
-  source .rvmrc
   gem install bundler
   bundle
   cp -n config/database.example.yml config/database.yml
