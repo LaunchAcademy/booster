@@ -120,6 +120,33 @@ run 'bundle install'
 
 ::FileUtils.rm_rf("test")
 
+file 'config/database_pg.example.yml',
+%Q{ # PostgreSQL. Versions 7.4 and 8.x are supported.
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: #{app_name}_development
+  pool: 5
+  username: app
+  password: qwerty
+  host: 127.0.0.1
+
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: #{app_name}_test
+  pool: 5
+  username: app
+  password: qwerty
+  host: 127.0.0.1
+
+}
+
+run 'cp config/database_pg.example.yml config/database.yml'
+run 'rake db:create'
+
 generate("rspec:install")
 file '.rspec',
 %q{
@@ -153,33 +180,6 @@ generate('responders:install')
 #====================
 # APP
 #====================
-
-file 'config/database_pg.example.yml',
-%Q{ # PostgreSQL. Versions 7.4 and 8.x are supported.
-
-development:
-  adapter: postgresql
-  encoding: unicode
-  database: #{app_name}_development
-  pool: 5
-  username: app
-  password: qwerty
-  host: 127.0.0.1
-
-
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: #{app_name}_test
-  pool: 5
-  username: app
-  password: qwerty
-  host: 127.0.0.1
-
-}
-
-run 'cp config/database_pg.example.yml config/database.yml'
-run 'rake db:create'
 
 file 'app/helpers/application_helper.rb',
 %q{module ApplicationHelper
