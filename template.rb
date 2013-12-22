@@ -116,6 +116,10 @@ group :development, :test do
   gem 'pry-rails'
 end
 
+group :production do
+  gem 'rails_12factor'
+end
+
 END
 
 run 'bundle install'
