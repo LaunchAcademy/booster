@@ -94,6 +94,7 @@ group :development do
     git: 'https://github.com/jonleighton/poltergeist.git'
 
   gem 'spring'
+  gem 'dotenv-rails'
 end
 
 group :test do
@@ -1074,6 +1075,9 @@ run 'cp config/environments/production.rb config/environments/staging.rb'
 
 run 'rm -rf test'
 
+run 'touch .env'
+run 'touch .env.example'
+
 # Set up gitignore and commit base state
 file '.gitignore', %q{
 .bundle
@@ -1090,6 +1094,7 @@ db/structure.sql
 *.swo
 .DS_Store
 **/.DS_STORE
+.env
 }, :force => true
 
 git :init
