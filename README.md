@@ -1,9 +1,9 @@
-# Ignition (LaunchWare's Rails Template)
+# Ignition (Launch Academy's Rails Template)
 
 * clone this repo
 
     ```
-      git clone git://github.com/LaunchWare/ignition.git
+      git clone git://github.com/LaunchAcademy/ignition.git
     ```
 
 * create a rails app from this template
@@ -52,7 +52,6 @@
 * [JQuery](http://jquery.com/) (google hosted)
 * [JQuery UI](http://jqueryui.com/) (google hosted)
 * JQuery Rails.js
-* [Backbone](http://backbonejs.org/)
 
 ## MacOS X Developers
 
