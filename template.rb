@@ -39,8 +39,6 @@ def from_repo(github_user, project_name, from, to = from.split("/").last)
   download("http://github.com/#{github_user}/#{project_name}/raw/master/#{from}", to)
 end
 
-gem 'pg'
-
 gem 'kaminari'
 gem 'slugged'
 
