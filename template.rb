@@ -1,5 +1,5 @@
 # Ignition template.rb
-# LaunchWare, Inc.'s Rails Template
+# Launch Academy Holdings, Inc.'s Rails Template
 # from Dan Pickett
 # based on Suspenders by Thoughtbot
 # influenced by Mike Gunderloy's rails template - http://gist.github.com/145676
@@ -39,36 +39,11 @@ def from_repo(github_user, project_name, from, to = from.split("/").last)
   download("http://github.com/#{github_user}/#{project_name}/raw/master/#{from}", to)
 end
 
-#====================
-# GEMS
-#====================
-
-file 'Gemfile', <<-END, :force => true
-source 'https://rubygems.org'
-
-gem 'rails', '4.1.0.beta1'
-
 gem 'pg'
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-
-gem 'jquery-rails'
-
 gem 'kaminari'
-# gem 'slugged'
+gem 'slugged'
+
 gem 'inherited_resources'
 gem 'simple_form'
 gem 'erubis'
@@ -77,7 +52,7 @@ gem 'configatron'
 gem 'bourbon'
 gem 'tab_menu'
 
-group :development do
+gem_group :development do
   gem 'rspec-rails'
 
   gem 'guard'
@@ -97,7 +72,7 @@ group :development do
   gem 'dotenv-rails'
 end
 
-group :test do
+gem_group :test do
   gem 'rspec-rails'
   gem 'mocha',
     require: false
@@ -112,15 +87,13 @@ group :test do
   gem 'fuubar'
 end
 
-group :development, :test do
+gem_group :development, :test do
   gem 'pry-rails'
 end
 
-group :production do
+gem_group :production do
   gem 'rails_12factor'
 end
-
-END
 
 run 'bundle install'
 
