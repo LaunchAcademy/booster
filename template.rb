@@ -1047,6 +1047,7 @@ run "rm public/index.html"
 run "rm README"
 
 run 'cp config/environments/production.rb config/environments/staging.rb'
+run 'cp config/database.yml config/database.example.yml'
 
 run 'rm -rf test'
 
