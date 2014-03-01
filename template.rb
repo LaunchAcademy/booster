@@ -286,6 +286,7 @@ initializer 'hosts.rb',
 }[Rails.env.to_sym]
 
 ActionMailer::Base.default_url_options[:host] = configatron.default_host
+Rails.application.routes.default_url_options[:host] = configatron.default_host
 }
 
 initializer 'errors.rb',
