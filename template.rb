@@ -286,6 +286,7 @@ initializer 'hosts.rb',
 }[Rails.env.to_sym]
 
 ActionMailer::Base.default_url_options[:host] = configatron.default_host
+Rails.application.routes.default_url_options[:host] = configatron.default_host
 }
 
 initializer 'errors.rb',
@@ -1047,6 +1048,7 @@ run "rm public/index.html"
 run "rm README"
 
 run 'cp config/environments/production.rb config/environments/staging.rb'
+run 'cp config/database.yml config/database.example.yml'
 
 run 'rm -rf test'
 
