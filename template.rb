@@ -1,4 +1,4 @@
-# Ignition template.rb
+# Booster template.rb
 # Launch Academy Holdings, Inc.'s Rails Template
 # from Dan Pickett
 # based on Suspenders by Thoughtbot

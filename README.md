@@ -1,9 +1,9 @@
-# Ignition (Launch Academy's Rails Template)
+# Booster (Launch Academy's Rails Template)
 
 * clone this repo
 
     ```
-      git clone git://github.com/LaunchAcademy/ignition.git
+      git clone git://github.com/LaunchAcademy/booster.git
     ```
 
 * create a rails app from this template
