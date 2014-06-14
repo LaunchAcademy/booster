@@ -42,7 +42,6 @@ end
 gem 'kaminari'
 gem 'slugged'
 
-gem 'inherited_resources'
 gem 'simple_form'
 gem 'erubis'
 gem 'airbrake'

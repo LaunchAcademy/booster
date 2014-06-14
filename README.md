@@ -15,7 +15,6 @@
 ## Gems
 
 * [kaminari](https://github.com/amatsuda/kaminari)
-* [Inherited Resources](https://github.com/josevalim/inherited_resources)
 * [Simple Form](https://github.com/plataformatec/simple_form)
 * [Airbrake](https://github.com/airbrake/airbrake)
 * [Configatron](https://github.com/markbates/configatron)
