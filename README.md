@@ -42,17 +42,10 @@
 
 ## CSS
 
-* Eric Meyer's Reset
+* Some aspects of HTML5 Boiler Plate and normalize.css
 * [bourbon](https://github.com/thoughtbot/bourbon)
 * conditional IE6/IE7 stylesheets
 
 ## JavaScript
 
-* [JQuery](http://jquery.com/) (google hosted)
-* [JQuery UI](http://jqueryui.com/) (google hosted)
-* JQuery Rails.js
-
-## MacOS X Developers
-
-Ignition is tested and working on Lion running Xcode 4.2 or later.
-
+* [JQuery](http://jquery.com/)
