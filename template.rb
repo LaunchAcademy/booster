@@ -963,7 +963,7 @@ clean_up
 exit $build_result
 })
 
-file('script/stage',
+file('bin/stage',
 %q{#!/bin/bash
 
 echo "Deploy to staging!"
@@ -974,7 +974,7 @@ echo "Deploy Complete"
 git checkout master
 })
 
-file('script/production',
+file('bin/production',
 %q{#!/bin/bash
 
 echo "Deploy to production!"
