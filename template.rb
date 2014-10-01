@@ -382,7 +382,7 @@ require 'factory_girl'
 require 'database_cleaner'
 require 'shoulda'
 require 'capybara/rspec'
-require 'mocha/api'
+require 'mocha/setup'
 require 'valid_attribute'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
