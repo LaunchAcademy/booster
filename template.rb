@@ -282,16 +282,6 @@ initializer 'validation_fix.rb',
   "<span class=\"fieldWithErrors\">#{html_tag}</span>".html_safe }
 }
 
-initializer 'pry.rb',
-%q{silence_warnings do
-  begin
-    require 'pry'
-    IRB = Pry
-  rescue LoadError
-  end
-end
-}
-
 initializer 'tab_menu.rb',
 %q{TabMenu.configure do |config|
   config.active_class = "active"
