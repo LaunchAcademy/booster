@@ -161,9 +161,8 @@ file 'app/assets/javascripts/application.js',
 //= require jquery
 //= require jquery_ujs
 //= require xhr_fix
-//= require vendor/underscore
-//= require vendor/backbone
-//= require vendor/handlebars
+//= require underscore
+//= require handlebars
 //= require_tree .
 
 }, force: true
