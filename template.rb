@@ -72,7 +72,7 @@ end
 gem_group :test do
   gem 'rspec-rails'
   gem 'mocha',
-    require: false
+    require: nil
   gem 'bourne'
   gem 'factory_girl_rails'
   gem 'valid_attribute'
