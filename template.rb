@@ -49,6 +49,8 @@ gem 'configatron'
 gem 'bourbon'
 gem 'tab_menu'
 
+gem 'bower-rails'
+
 gem_group :development do
   gem 'rspec-rails'
 
@@ -178,15 +180,37 @@ file 'app/assets/stylesheets/application.css.scss',
  *
 */
 
+@import 'foundation/css/normalize';
+@import 'foundation/css/foundation';
+
+@import 'font-awesome/scss/font-awesome';
+@import 'fa_fix';
+
 // Thoughtbot's Bourbon Mixins
 @import "bourbon";
-
-// Settings
-@import "settings";
-
-// Print Styles
-@import "print";
 }, force: true
+
+file 'app/assets/stylesheets/fa_fix.css.scss.erb',
+%q{
+/* FONT PATH: we have to hack this due to sprockets awesomeness
+ * -------------------------- */
+@font-face {
+  font-family: 'FontAwesome';
+  src: font-url('<%= asset_path 'font-awesome/fonts/fontawesome-webfont.eot' %>');
+  src: font-url('<%= asset_path 'font-awesome/fonts/fontawesome-webfont.eot' %>?#iefix') format('embedded-opentype'),
+    font-url('<%= asset_path 'font-awesome/fonts/fontawesome-webfont.woff' %>?v=#{$fa-version}') format('woff'),
+    font-url('<%= asset_path 'font-awesome/fonts/fontawesome-webfont.ttf' %>?v=#{$fa-version}') format('truetype'),
+    font-url('<%= asset_path 'font-awesome/fonts/fontawesome-webfont.svg' %>?v=#{$fa-version}#fontawesomeregular') format('svg');
+  //src: url('#{$fa-font-path}/FontAwesome.otf') format('opentype'); // used when developing fonts
+  font-weight: normal;
+  font-style: normal;
+}
+}
+
+initializer 'font_awesome.rb',
+%q{
+Rails.application.config.assets.precompile << 'font-awesome/fonts/*'
+}
 
 file 'app/views/layouts/application.html.erb',
 %q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -523,6 +547,22 @@ end
 }
 
 # ====================
+# BOWER
+# ====================
+
+generate('bower_rails:initialize json')
+
+file 'Bowerfile',
+%q{
+asset 'foundation'
+asset 'underscore'
+asset 'handlebars'
+asset 'font-awesome'
+}
+
+rake 'bower:install'
+
+# ====================
 # FINALIZE
 # ====================
 
@@ -538,7 +578,8 @@ run 'touch .env'
 run 'touch .env.example'
 
 # Set up gitignore and commit base state
-file '.gitignore', %q{
+file '.gitignore',
+%q{
 .bundle
 log/*.log
 /log/*.pid
