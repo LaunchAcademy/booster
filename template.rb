@@ -68,6 +68,7 @@ gem_group :development do
     git: 'https://github.com/jonleighton/poltergeist.git'
 
   gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'dotenv-rails'
 end
 
@@ -525,6 +526,7 @@ guard :konacha,
 end
 
 guard 'rspec',
+  cmd: './bin/rspec'
   all_on_start: false,
   all_after_pass: false do
 
@@ -561,6 +563,8 @@ rake 'bower:install'
 # ====================
 # FINALIZE
 # ====================
+
+run 'bundle exec spring rspec binstub'
 
 run "rm public/index.html"
 run "rm README"
