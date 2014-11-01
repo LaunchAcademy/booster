@@ -526,7 +526,7 @@ guard :konacha,
 end
 
 guard 'rspec',
-  cmd: './bin/rspec'
+  cmd: './bin/rspec',
   all_on_start: false,
   all_after_pass: false do
 
