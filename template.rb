@@ -384,7 +384,7 @@ require 'rspec/rails'
 require 'factory_girl'
 require 'database_cleaner'
 
-require 'shoulda'
+require 'shoulda-matchers'
 require 'capybara/rspec'
 require 'valid_attribute/rspec'
 
