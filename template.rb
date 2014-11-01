@@ -386,7 +386,7 @@ require 'database_cleaner'
 
 require 'shoulda'
 require 'capybara/rspec'
-require 'valid_attribute'
+require 'valid_attribute/rspec'
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
